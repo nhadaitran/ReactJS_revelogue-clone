@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+$main-font: "Montserrat", sans-serif;
+
+$bg-white: rgba(255, 255, 255);
+$bg-black: rgba(0, 0, 0);
+$bg-inherit: rgba(38, 38, 38);
+
+$text-white: rgba(240, 240, 240);
+$text-black: rgba(15, 15, 15);
+$text-link: rgba(215, 156, 116);
+
+$primary: rgba(0, 0, 255);
+$success: rgba(0, 255, 0);
+$alert: rgba(255, 0, 0);
+$inherit: rgba(0, 0, 0,0.5);
+$secondary: rgba(229, 234, 239);
+$muted: rgba(220, 220, 220);
+
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 32px;
+$spacing-xl: 64px;
+
+$fs-md: 16px;
+$fs-lg: 20px;
+
+$header-height: 60px;
+
+$sm: 36em;
+$md: 48em;
+$lg: 62em;
+$xl: 75em;
+$xxl: 87.5em;
+

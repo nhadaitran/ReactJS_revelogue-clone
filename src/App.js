@@ -1,24 +1,43 @@
-import logo from './logo.png';
-import './App.css';
-
+// import { Routes, Route } from "react-router-dom";
+import AppLayout from "./layouts/layout";
+import Index from "./pages/index";
+// eslint-disable-next-line no-unused-vars
+import styles from "./styles/index.scss";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Giờ thì chưa có gì đâu nhưng sắp có ròi á 🤣
-        </p>
-        <a
-          className="App-link"
-          href="https://revelogue.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Trang gốc
-        </a>
-      </header>
-    </div>
+    <AppLayout>
+      <Index/>
+    {/* <Routes>
+      <Route exact path="/" element={<Home />} />
+      <Route path="doctor">
+        <Route index element={<Doctor />} />
+        <Route path=":doctorID" element={<DoctorDetail />} />
+      </Route>
+      <Route path="cam-nang">
+        <Route index element={<HandBook />} />
+      </Route>
+      <Route path="department">
+        <Route index element={<Department />} />
+        <Route path=":departmentID" element={<DepartmentDetail />} />
+      </Route>
+      <Route path="thong-tin-ca-nhan">
+        <Route index element={<Profile />} />
+        <Route path=":userID" element={<UserDetail />} />
+      </Route>
+      <Route path="historyBooking">
+        <Route index element={<HisotoryBooking />} />
+        <Route path=":maDL" element={<BookingDetail />} />
+      </Route>
+      <Route exact path="/hospital" element={<Hospital />} />
+      <Route exact path="/change-password" element={<ChangePassword />} />
+
+      <Route exact path="/booking" element={<Booking />} />
+      <Route exact path="/search" element={<Search />} />
+      <Route exact path="/ho-so-suc-khoe" element={<HistoryMedical />} />
+      <Route exact path="/404" element={<PageNotFound />} />
+      <Route exact path="/verify-booking/:token&:MaDL" element={<VerifyBooking />} />
+    </Routes> */}
+  </AppLayout>
   );
 }
 
