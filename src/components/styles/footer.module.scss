@@ -2,11 +2,13 @@
 @import "../../styles/mixins";
 .footer {
   background-color: $bg-inherit;
+  min-width: calc($lg/3);
   &__content {
-    padding: $spacing-sm * 3 0;
+    overflow: hidden;
+    padding: $spacing-sm * 3 $spacing-lg;
     color: $text-white;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: auto;
 
     @include breakpoint(sm) {
       padding: $spacing-sm * 3 $spacing-lg * 5;
@@ -34,11 +36,11 @@
         & > div {
           display: grid;
           grid-template-columns: repeat(2, $spacing-lg * 3.75);
-          
-           &:nth-child(2){
+
+          &:nth-child(2) {
             align-items: center;
-           }
           }
+        }
       }
 
       &:nth-child(2) {

@@ -4,6 +4,7 @@
 .container {
   background: $bg-white;
   padding: $spacing-md $spacing-md 0;
+  min-width: calc($lg/3);
 
   & > div {
     &:first-child {
@@ -11,9 +12,9 @@
       top: $spacing-xl * 4;
       position: fixed;
       cursor: pointer;
-      display:none;
+      display: none;
       @include breakpoint(md) {
-        display:flex;
+        display: flex;
       }
     }
   }
@@ -23,7 +24,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  display:none;
+  display: none;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.5s, opacity 0.5s linear;
@@ -33,8 +34,8 @@
     color: $inherit;
   }
 
-  @include breakpoint(lg){
-    display:inline-flex;
+  @include breakpoint(lg) {
+    display: inline-flex;
   }
 }
 
@@ -55,8 +56,11 @@
 
 .content {
   padding-left: 0;
-  overflow-wrap: break-word;
   overflow: hidden;
+  @include breakpoint(sm) {
+    overflow-wrap: break-word;
+    
+  }
 
   @include breakpoint(md) {
     padding-left: $spacing-lg * 3;
