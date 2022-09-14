@@ -1,0 +1,116 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.container {
+  background: $bg-white;
+  padding: $spacing-md $spacing-md 0;
+
+  & > div {
+    &:first-child {
+      margin-left: $spacing-lg;
+      top: $spacing-xl * 4;
+      position: fixed;
+      cursor: pointer;
+      display:none;
+      @include breakpoint(md) {
+        display:flex;
+      }
+    }
+  }
+}
+
+.save {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display:none;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+
+  & > svg {
+    font-size: $h3 * 2;
+    color: $inherit;
+  }
+
+  @include breakpoint(lg){
+    display:inline-flex;
+  }
+}
+
+.save__moblie {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  visibility: visible;
+  color: $inherit;
+  & > svg {
+    vertical-align: middle;
+    font-size: $h3;
+  }
+  @include breakpoint(lg) {
+    visibility: hidden;
+  }
+}
+
+.content {
+  padding-left: 0;
+  overflow-wrap: break-word;
+  overflow: hidden;
+
+  @include breakpoint(md) {
+    padding-left: $spacing-lg * 3;
+  }
+
+  &__category {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: x-small;
+    letter-spacing: calc($spacing-sm/3);
+    & > a {
+      text-decoration: none;
+      color: $text-link;
+    }
+  }
+
+  &__title {
+    padding: $spacing-sm 0;
+    font-weight: bolder;
+    font-size: $h1 * 1.1;
+
+    &:hover {
+      .save {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__writer {
+    display: flex;
+    align-items: center;
+    font-size: $h5;
+    color: $inherit;
+    & > img {
+      width: 30px;
+      height: 30px;
+      border-radius: $spacing-sm;
+      filter: grayscale(100%);
+      transition: filter 0.5s;
+      &:hover {
+        filter: none;
+      }
+    }
+    & > p {
+      padding: 0 $spacing-md;
+      & > svg {
+        vertical-align: middle;
+        font-size: $h3;
+      }
+    }
+  }
+
+  &__main {
+    padding-top: $spacing-lg;
+  }
+}

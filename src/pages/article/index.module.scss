@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.index{
+    height: 100vh;
+    padding-top:$header-height;
+    margin:0 $spacing-md;
+    @include breakpoint(lg){
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        margin:0 $spacing-xl*2;
+    }
+    
+}

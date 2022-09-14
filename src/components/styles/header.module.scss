@@ -80,7 +80,7 @@
   position: fixed;
   top: $header-height;
   right: -100%;
-  //   background: transparent;
+    background: $bg-white;
   //   text-align: center;
 
   &--open {
@@ -96,6 +96,7 @@
     height: 100%;
     transition: 0.3s ease color;
     border: 1px solid rgba(0, 0, 0, 0.2);
+    
     &:hover {
     color: $text-black;
     }
@@ -129,7 +130,7 @@
   color: $inherit;
   border: 2px solid $inherit;
   padding: $spacing-sm $spacing-lg;
-  border-radius: $spacing-sm / 2;
+  border-radius: calc($spacing-sm / 2);
   cursor: pointer;
   box-shadow: 0 0 0.5em 0 $inherit;
 
@@ -161,7 +162,7 @@
     width: $spacing-lg;
     border: 1px solid $inherit;
     border-right: none;
-    padding: $spacing-sm / 2;
+    padding: calc($spacing-sm / 2);
     border-radius: $spacing-sm 0 0 $spacing-sm;
     outline: none;
     color: $text-black;

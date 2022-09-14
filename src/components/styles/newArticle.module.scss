@@ -1,0 +1,60 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.widget {
+  background: $bg-white;
+  display: none;
+  padding: $spacing-md $spacing-lg 0 $spacing-xl;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  @include breakpoint(lg) {
+    display: block;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: $h3;
+    color: text;
+  }
+
+  &__group {
+    
+    &__item {
+      display: grid;
+      grid-template-columns: auto 2fr;
+      padding-top: $spacing-md;
+      border-bottom: 1px solid $muted;
+      &__thumbnail {
+        padding: 0 $spacing-md $spacing-md 0;
+        & > img {
+          width: 70px;
+          height: 70px;
+          border-radius: $spacing-sm;
+        }
+      }
+
+      &__content {
+        &__title {
+          text-decoration: none;
+          color: $text-black;
+          font-weight: bold;
+          font-size: $h5;
+        }
+        &__meta {
+          
+          display: flex;
+          align-items: center;
+          font-size: $h5;
+          color: $inherit;
+          padding-top:$spacing-md;
+          word-spacing: calc($spacing-sm/5);
+          & > svg {
+            margin: 0 $spacing-sm;
+            vertical-align: middle;
+            font-size: $h3;
+          }
+        }
+      }
+    }
+  }
+}

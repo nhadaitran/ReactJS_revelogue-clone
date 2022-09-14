@@ -1,12 +1,13 @@
 // import { Routes, Route } from "react-router-dom";
 import AppLayout from "./layouts/layout";
-import Index from "./pages/index";
+// import Index from "./pages/index";
+import Article from "./pages/article/index";
 // eslint-disable-next-line no-unused-vars
 import styles from "./styles/index.scss";
 function App() {
   return (
     <AppLayout>
-      <Index/>
+      <Article/>
     {/* <Routes>
       <Route exact path="/" element={<Home />} />
       <Route path="doctor">
