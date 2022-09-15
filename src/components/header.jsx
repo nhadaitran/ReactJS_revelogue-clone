@@ -104,24 +104,26 @@ const Header = () => {
           </nav>
         </div>
         <div>
-          <button
-            className={styles.search__toggler}
-            onClick={handleSearchToggler}
-          >
-            <SearchIcon />
-          </button>
-          <div
-            className={`${styles.search} ${
-              searchOpen ? styles[`search--open`] : styles[`search--close`]
-            }`}
-          >
+          <div className={styles.search}>
             <input
               type="text"
-              className={styles.search__input}
+              className={`${styles.search__input} ${
+                searchOpen
+                  ? styles[`search__input--open`]
+                  : styles[`search__input`]
+              }`}
               placeholder="Nhập nội dung cần tìm..."
               onBlur={handleSearchToggler}
             />
-            <button type="submit" className={styles.search__submit}>
+            <button
+              type="submit"
+              className={`${styles.search__submit} ${
+                searchOpen
+                  ? styles[`search__submit`]
+                  : styles[`search__submit--close`]
+              }`}
+              onClick={handleSearchToggler}
+            >
               <SearchIcon />
             </button>
           </div>

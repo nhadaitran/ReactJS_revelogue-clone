@@ -163,22 +163,9 @@
 }
 
 .search {
-  position: relative;
-  display: flex;
-  right: -1000%;
-
-  &--close {
-    transition: 0.5s ease right;
-    right: -1000%;
-  }
-
-  &--open {
-    transition: 0.5s ease right;
-    right: $spacing-md;
-  }
+  margin-right: $spacing-md;
 
   &__input {
-    width: $spacing-lg;
     border: 1px solid $inherit;
     border-right: none;
     padding: calc($spacing-sm / 2);
@@ -186,17 +173,20 @@
     outline: none;
     color: $text-black;
     font-size: $fs-md;
-
-    @include breakpoint(lg) {
+    width: 0;
+    height: $spacing-lg;
+    vertical-align: middle;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    &--open {
+      visibility: visible;
       width: $spacing-lg * 3;
-    }
-
-    @include breakpoint(xl) {
-      width: $spacing-lg * 6;
-    }
-
-    @include breakpoint(xxl) {
-      width: $spacing-lg * 6;
+      @include breakpoint(xl) {
+        width: $spacing-lg * 5;
+      }
+      @include breakpoint(xxl) {
+        width: $spacing-lg * 6;
+      }
     }
   }
 
@@ -205,33 +195,22 @@
     border-left: none;
     background: $bg-white;
     text-align: center;
+    vertical-align: middle;
+    height: $spacing-lg;
     color: $inherit;
     border-radius: 0 $spacing-sm $spacing-sm 0;
     font-size: $fs-lg;
-
     &:hover {
       background: $secondary;
     }
-  }
-}
 
-.search__toggler {
-  display: none;
-  @include breakpoint(lg) {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 0;
-    background: transparent;
-    cursor: pointer;
-    right: -120%;
-  }
-  @include breakpoint(xl) {
-    right: -210%;
-  }
-  @include breakpoint(xxl) {
-    right: -220%;
+    &--close {
+      cursor: pointer;
+      border: none;
+      &:hover {
+        background: transparent;
+      }
+    }
   }
 }
 
