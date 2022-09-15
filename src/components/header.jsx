@@ -10,15 +10,6 @@ import SearchIcon from "@mui/icons-material/Search";
 const Header = () => {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
-  const pages = [
-    "Viết lách",
-    "Văn học",
-    "Điện ảnh",
-    "Nhiếp ảnh",
-    "Âm nhạc",
-    "Văn hoá",
-    "Mỹ thuật",
-  ];
   const handleMenuToggler = () => setMenuOpen((p) => !p);
   const handleSearchToggler = () => setSearchOpen((p) => !p);
   return (
@@ -60,7 +51,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/article"
+              to="/"
             >
               Văn học
               <MoreVertIcon />
@@ -69,7 +60,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/article"
+              to="/"
             >
               Điện ảnh
               <MoreVertIcon />
@@ -78,7 +69,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/article"
+              to="/"
             >
               Nhiếp ảnh
               <MoreVertIcon />
@@ -87,7 +78,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/article"
+              to="/"
             >
               Âm nhạc
               <MoreVertIcon />
@@ -96,7 +87,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/article"
+              to="/"
             >
               Văn hoá
               <MoreVertIcon />
@@ -105,14 +96,11 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/article"
+              to="/"
             >
               Mỹ thuật
               <MoreVertIcon />
             </NavLink>
-            <div className={styles.nav__button__login}>
-              <LoginButton />
-            </div>
           </nav>
         </div>
         <div>
@@ -137,16 +125,28 @@ const Header = () => {
               <SearchIcon />
             </button>
           </div>
-          <div className={styles.header__button__login}>
-            <LoginButton />
-          </div>
+          <Calendar />
         </div>
       </div>
     </div>
   );
 };
 
-const LoginButton = () => {
-  return <button className={styles.button}>Login</button>;
+const Calendar = () => {
+  let newDate = new Date();
+  let date = newDate.getDate();
+  let month = newDate.getMonth() + 1;
+  let year = newDate.getFullYear();
+  return (
+    <div className={styles.calendar}>
+      <div>
+        <p>{date}</p>
+      </div>
+      <div>
+        <p>TH{month}</p>
+        <p>{year}</p>
+      </div>
+    </div>
+  );
 };
 export default Header;

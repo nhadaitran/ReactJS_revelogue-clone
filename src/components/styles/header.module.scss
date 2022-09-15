@@ -77,7 +77,7 @@
 }
 
 .nav {
-  font-size: 14px;
+  font-size: $h5;
   width: 100%;
   position: fixed;
   top: $header-height + $spacing-lg;
@@ -100,53 +100,65 @@
 
     &--active {
       color: $text-black;
-      padding: 0 $spacing-sm;
       text-decoration: none;
+      display: block;
+      padding: $spacing-md;
+      text-decoration: none;
+      transition: 0.3s ease color;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      svg {
+        display: none;
+      }
     }
 
     &:hover {
       color: $text-black;
     }
 
-    & > svg {
+    svg {
       display: none;
     }
   }
+
   @include breakpoint(lg) {
-    @include navbar;
-    @include navbar-lg;
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(4, $spacing-lg * 3);
+
+    &__item {
+      border: none;
+      padding: 0 $spacing-sm * 1.5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      svg {
+        display: initial;
+        font-size: $fs-md;
+      }
+
+      &--active {
+        color: $text-black;
+        padding: 0 $spacing-sm * 1.5;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        & > svg {
+          display: initial;
+          font-size: $fs-md;
+        }
+      }
+    }
   }
   @include breakpoint(xl) {
-    @include navbar;
-    @include navbar-xl;
+    grid-template-columns: repeat(4, $spacing-lg * 4);
   }
   @include breakpoint(xxl) {
-    @include navbar;
-  }
-
-  &__button__login {
-    @include breakpoint(lg) {
-      display: none;
-    }
-    padding: $spacing-md;
-  }
-}
-
-.button {
-  font-weight: 500;
-  color: $inherit;
-  border: 2px solid $inherit;
-  padding: $spacing-sm $spacing-lg;
-  border-radius: calc($spacing-sm / 2);
-  cursor: pointer;
-  box-shadow: 0 0 0.5em 0 $inherit;
-
-  &:active {
-    transform: scale(0.98);
-    border-radius: 0;
-  }
-  &:hover {
-    box-shadow: 0 0 0.75em 0 $inherit;
+    position: static;
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -206,15 +218,44 @@
 .search__toggler {
   display: none;
   @include breakpoint(lg) {
-    @include search-toggler;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
     right: -120%;
   }
   @include breakpoint(xl) {
-    @include search-toggler;
     right: -210%;
   }
   @include breakpoint(xxl) {
-    @include search-toggler;
     right: -220%;
+  }
+}
+
+.calendar {
+  display: none;
+  @include breakpoint(lg) {
+    color: $bg-black;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    & > div {
+      &:first-child {
+        margin-right: $spacing-sm;
+        p {
+          font-size: $h5 * 2;
+        }
+      }
+      &:last-child {
+        display: grid;
+        grid-template-rows: repeat(2, $spacing-sm * 1.6);
+        p {
+          font-weight: 600;
+          font-size: $h6;
+        }
+      }
+    }
   }
 }
