@@ -4,11 +4,13 @@
 .widget {
   background: $bg-white;
   display: none;
-  padding: $spacing-md $spacing-lg 0 $spacing-xl;
-  overflow-wrap: break-word;
+  padding: $spacing-md 0;
   overflow: hidden;
   @include breakpoint(lg) {
     display: block;
+  }
+  @include breakpoint(xl) {
+    padding: $spacing-md $spacing-lg 0 $spacing-xl;
   }
 
   &__title {
@@ -18,7 +20,6 @@
   }
 
   &__group {
-    
     &__item {
       display: grid;
       grid-template-columns: auto 2fr;
@@ -35,19 +36,20 @@
 
       &__content {
         &__title {
+          white-space: normal;
           text-decoration: none;
           color: $text-black;
           font-weight: bold;
           font-size: $h5;
         }
         &__meta {
-          
+          white-space: pre;
           display: flex;
           align-items: center;
           font-size: $h5;
           color: $inherit;
-          padding-top:$spacing-md;
-          word-spacing: calc($spacing-sm/5);
+          padding-top: $spacing-md;
+
           & > svg {
             margin: 0 $spacing-sm;
             vertical-align: middle;

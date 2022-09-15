@@ -9,12 +9,15 @@
   & > div {
     &:first-child {
       margin-left: $spacing-lg;
-      top: $spacing-xl * 4;
       position: fixed;
       cursor: pointer;
       display: none;
       @include breakpoint(md) {
+        top: $spacing-xl * 8;
         display: flex;
+      }
+      @include breakpoint(lg) {
+        top: $spacing-xl * 6;
       }
     }
   }
@@ -59,7 +62,6 @@
   overflow: hidden;
   @include breakpoint(sm) {
     overflow-wrap: break-word;
-    
   }
 
   @include breakpoint(md) {
@@ -104,9 +106,15 @@
       &:hover {
         filter: none;
       }
+      display:none;
+      @include breakpoint(sm){
+        display:block;
+      }
     }
     & > p {
-      padding: 0 $spacing-md;
+      @include breakpoint(sm){
+        padding: 0 $spacing-md;
+      }
       & > svg {
         vertical-align: middle;
         font-size: $h3;

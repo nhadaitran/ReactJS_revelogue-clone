@@ -1,6 +1,6 @@
 import styles from "./index.module.scss";
 import Widget from "../../components/widget";
-import Content from "../../components/content";
+import Category from "../../components/content";
 import Breadcrumb from "../../components/breadcrumb";
 import ImageMobile from "../../assets/images/Web900x512.png";
 const Article = () => {
@@ -9,7 +9,7 @@ const Article = () => {
       <Breadcrumb />
       <img className={styles.mobile} src={ImageMobile} alt="" />
       <div className={styles.index}>
-        <Content />
+        <Category />
         <Widget />
       </div>
     </>

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/logo.png";
 import styles from "./styles/header.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -38,29 +39,93 @@ const Header = () => {
           <nav
             className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
           >
-            <a className={styles.nav__item} href={"/"}>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/"
+            >
               Trang chủ
-            </a>
-            {pages.map((page) => (
-              <a className={styles.nav__item} href={"/"}>
-                {page}
-                <MoreVertIcon />
-              </a>
-            ))}
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/article"
+            >
+              Viết lách
+              <MoreVertIcon />
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/article"
+            >
+              Văn học
+              <MoreVertIcon />
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/article"
+            >
+              Điện ảnh
+              <MoreVertIcon />
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/article"
+            >
+              Nhiếp ảnh
+              <MoreVertIcon />
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/article"
+            >
+              Âm nhạc
+              <MoreVertIcon />
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/article"
+            >
+              Văn hoá
+              <MoreVertIcon />
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`nav__item--active`] : styles.nav__item
+              }
+              to="/article"
+            >
+              Mỹ thuật
+              <MoreVertIcon />
+            </NavLink>
             <div className={styles.nav__button__login}>
               <LoginButton />
             </div>
           </nav>
         </div>
         <div>
-        <button
+          <button
             className={styles.search__toggler}
             onClick={handleSearchToggler}
           >
-            <SearchIcon/>
+            <SearchIcon />
           </button>
           <div
-          className={`${styles.search} ${searchOpen ? styles[`search--open`] : styles[`search--close`]}`}
+            className={`${styles.search} ${
+              searchOpen ? styles[`search--open`] : styles[`search--close`]
+            }`}
           >
             <input
               type="text"
@@ -74,7 +139,6 @@ const Header = () => {
           </div>
           <div className={styles.header__button__login}>
             <LoginButton />
-
           </div>
         </div>
       </div>

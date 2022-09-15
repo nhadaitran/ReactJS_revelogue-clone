@@ -10,9 +10,11 @@
   z-index: 1000;
   width: 100%;
   box-shadow: 0 1px rgba(0, 0, 0, 0.1);
-
+  padding: 50px 0;
+  @include breakpoint(lg) {
+    padding: 0;
+  }
   &__content {
-    
     margin: 0 auto;
     padding: 0 $spacing-md;
     @include breakpoint(lg) {
@@ -78,10 +80,9 @@
   font-size: 14px;
   width: 100%;
   position: fixed;
-  top: $header-height;
+  top: $header-height + $spacing-lg;
   right: -100%;
-    background: $bg-white;
-  //   text-align: center;
+  background: $bg-white;
 
   &--open {
     transition: 0.2s ease top;
@@ -96,9 +97,15 @@
     height: 100%;
     transition: 0.3s ease color;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    
+
+    &--active {
+      color: $text-black;
+      padding: 0 $spacing-sm;
+      text-decoration: none;
+    }
+
     &:hover {
-    color: $text-black;
+      color: $text-black;
     }
 
     & > svg {
@@ -169,8 +176,8 @@
     font-size: $fs-md;
 
     @include breakpoint(lg) {
-        width: $spacing-lg * 3;
-      }
+      width: $spacing-lg * 3;
+    }
 
     @include breakpoint(xl) {
       width: $spacing-lg * 6;
@@ -197,17 +204,17 @@
 }
 
 .search__toggler {
-    display:none;
-    @include breakpoint(lg) {
-        @include search-toggler;
-        right: -120%;
-    }
-    @include breakpoint(xl) {
-        @include search-toggler;
-        right: -210%;
-    }
-    @include breakpoint(xxl) {
-        @include search-toggler;
-        right: -220%;
-    }
+  display: none;
+  @include breakpoint(lg) {
+    @include search-toggler;
+    right: -120%;
   }
+  @include breakpoint(xl) {
+    @include search-toggler;
+    right: -210%;
+  }
+  @include breakpoint(xxl) {
+    @include search-toggler;
+    right: -220%;
+  }
+}

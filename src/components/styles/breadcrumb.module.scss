@@ -1,0 +1,36 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.container {
+  padding-top: $header-height + $spacing-md*3;
+  min-width: calc($lg/3);
+  @include breakpoint(lg) {
+    padding-top: $spacing-md;
+  }
+  ol {
+    margin: 0 auto;
+    padding:0 $spacing-md;
+    @include breakpoint(lg) {
+      padding-top: $header-height;
+      margin: 0 $spacing-xl * 2;
+    }
+  }
+
+  li {
+    font-size: $h5;
+    color: $inherit;
+    display: inline;
+
+    &:last-child {
+      font-weight: bold;
+      color: $text-black;
+    }
+  }
+
+  li + li::before {
+    padding: $spacing-sm*1.5;
+    color: $inherit;
+    font-weight: bold;
+    content: "/";
+  }
+}

@@ -1,4 +1,4 @@
-import styles from "./styles/newArticle.module.scss";
+import styles from "./styles/widget.module.scss";
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 const NewArticle = () => {
   return (
