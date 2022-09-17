@@ -2,15 +2,17 @@
 @import "../../styles/mixins";
 
 .widget {
+  position: sticky;
+  top: 100px;
   background: $bg-white;
+  height: 100%;
   display: none;
   padding: $spacing-md 0;
-  overflow: hidden;
   @include breakpoint(lg) {
     display: block;
   }
   @include breakpoint(xl) {
-    padding: $spacing-md $spacing-lg 0 $spacing-xl;
+    padding: $spacing-md $spacing-sm 0;
   }
 
   &__title {
@@ -24,7 +26,7 @@
       display: grid;
       grid-template-columns: auto 2fr;
       padding-top: $spacing-md;
-      border-bottom: 1px solid $muted;
+      border-bottom: 1px solid $secondary;
       &__thumbnail {
         padding: 0 $spacing-md $spacing-md 0;
         & > img {

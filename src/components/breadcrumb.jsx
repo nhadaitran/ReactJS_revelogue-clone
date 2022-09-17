@@ -4,7 +4,7 @@ const Breadcrumbs = () => {
   return (
     <nav className={styles.container}>
       <ol>
-        <li> Trang chủ </li>
+        <li> Home </li>
         <li> Article </li>
       </ol>
     </nav>

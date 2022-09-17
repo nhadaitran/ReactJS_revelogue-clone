@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./layouts/layout";
 import Article from "./pages/article/index";
+import Category from "./pages/category/index";
 import Home from "./pages/home/index";
 // eslint-disable-next-line no-unused-vars
 import styles from "./styles/index.scss";
@@ -11,6 +12,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="article" element={<Article />} />
+          <Route path="category" element={<Category />} />
         </Routes>
       </AppLayout>
     </BrowserRouter>

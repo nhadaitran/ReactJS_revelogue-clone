@@ -3,13 +3,14 @@
 .footer {
   background-color: $bg-inherit;
   min-width: calc($lg/3);
+  bottom: 0;
+  position:relative;
   &__content {
     overflow: hidden;
     padding: $spacing-sm * 3 $spacing-lg;
     color: $text-white;
     display: grid;
     grid-template-columns: auto;
-
     @include breakpoint(sm) {
       padding: $spacing-sm * 3 $spacing-lg * 5;
     }

@@ -2,14 +2,14 @@
 @import "../../styles/mixins";
 
 .container {
-  padding-top: $header-height + $spacing-md*3;
+  padding-top: $header-height + $spacing-md * 3;
   min-width: calc($lg/3);
   @include breakpoint(lg) {
-    padding-top: $spacing-md;
+    padding-top: $spacing-md * 1.5;
   }
   ol {
     margin: 0 auto;
-    padding:0 $spacing-md;
+    padding: 0 $spacing-md*1.5;
     @include breakpoint(lg) {
       padding-top: $header-height;
       margin: 0 $spacing-xl * 2;
@@ -28,7 +28,7 @@
   }
 
   li + li::before {
-    padding: $spacing-sm*1.5;
+    padding: $spacing-sm * 1.5;
     color: $inherit;
     font-weight: bold;
     content: "/";

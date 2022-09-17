@@ -42,7 +42,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/article"
+              to="/category"
             >
               Viết lách
               <MoreVertIcon />
@@ -51,7 +51,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/"
+              to="/category"
             >
               Văn học
               <MoreVertIcon />
@@ -60,7 +60,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/"
+              to="/category"
             >
               Điện ảnh
               <MoreVertIcon />
@@ -69,7 +69,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/"
+              to="/category"
             >
               Nhiếp ảnh
               <MoreVertIcon />
@@ -78,7 +78,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/"
+              to="/category"
             >
               Âm nhạc
               <MoreVertIcon />
@@ -87,7 +87,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/"
+              to="/category"
             >
               Văn hoá
               <MoreVertIcon />
@@ -96,7 +96,7 @@ const Header = () => {
               className={({ isActive }) =>
                 isActive ? styles[`nav__item--active`] : styles.nav__item
               }
-              to="/"
+              to="/category"
             >
               Mỹ thuật
               <MoreVertIcon />
@@ -122,7 +122,7 @@ const Header = () => {
                   ? styles[`search__submit`]
                   : styles[`search__submit--close`]
               }`}
-              onClick={handleSearchToggler}
+              onClick={searchOpen ? "" : handleSearchToggler}
             >
               <SearchIcon />
             </button>
