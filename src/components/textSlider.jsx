@@ -36,22 +36,24 @@ const TextSlider = () => {
   const [index, setIndex] = React.useState(0);
   React.useEffect(() => {
     const SliderInterval = setInterval(() => {
-      handleNextSlider();
+      setIndex((prevIndex) =>
+        prevIndex !== data.length - 1 ? prevIndex + 1 : 0
+      );
     }, 5000);
     return () => clearInterval(SliderInterval);
   }, []);
   const handleNextSlider = () => {
     if (index !== data.length - 1) {
-        setIndex((prevIndex) => prevIndex + 1);
+      setIndex((prevIndex) => prevIndex + 1);
     } else {
-        setIndex(0);
+      setIndex(0);
     }
   };
   const handlePrevSlider = () => {
     if (index !== 0) {
-        setIndex((prevIndex) => prevIndex - 1);
+      setIndex((prevIndex) => prevIndex - 1);
     } else {
-        setIndex(data.length - 1);
+      setIndex(data.length - 1);
     }
   };
   return (
