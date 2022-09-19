@@ -33,46 +33,25 @@ const TextSlider = () => {
       value: "	BoA: Xứng danh là huyền thoại nhạc Pop của nền âm nhạc xứ Hàn",
     },
   ];
+  const [index, setIndex] = React.useState(0);
   React.useEffect(() => {
-    setInterval(() => {
+    const SliderInterval = setInterval(() => {
       handleNextSlider();
     }, 5000);
-  });
-  const [sliderData, setSliderData] = React.useState({
-    id: data[0].id,
-    image: data[0].image_url,
-    value: data[0].value,
-  });
+    return () => clearInterval(SliderInterval);
+  }, []);
   const handleNextSlider = () => {
-    const index = sliderData.id;
     if (index !== data.length - 1) {
-      setSliderData({
-        id: data[index + 1].id,
-        image: data[index + 1].image_url,
-        value: data[index + 1].value,
-      });
+        setIndex((prevIndex) => prevIndex + 1);
     } else {
-      setSliderData({
-        id: data[0].id,
-        image: data[0].image_url,
-        value: data[0].value,
-      });
+        setIndex(0);
     }
   };
   const handlePrevSlider = () => {
-    const index = sliderData.id;
     if (index !== 0) {
-      setSliderData({
-        id: data[index - 1].id,
-        image: data[index - 1].image_url,
-        value: data[index - 1].value,
-      });
+        setIndex((prevIndex) => prevIndex - 1);
     } else {
-      setSliderData({
-        id: data[data.length - 1].id,
-        image: data[data.length - 1].image_url,
-        value: data[data.length - 1].value,
-      });
+        setIndex(data.length - 1);
     }
   };
   return (
@@ -82,7 +61,7 @@ const TextSlider = () => {
         <div
           key={i}
           className={`${styles.slider__post} ${
-            sliderData.id === data.id
+            index === data.id
               ? styles[`slider__post--open`]
               : styles[`slider__post--close`]
           }`}
