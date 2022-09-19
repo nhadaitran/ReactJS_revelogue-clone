@@ -26,3 +26,27 @@
   height: 50px;
   width: 100px;
 }
+
+@mixin TextSliderButton {
+  width: $spacing-md * 1.7;
+  height: $spacing-md * 1.7;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  cursor: pointer;
+  margin: 0 calc($spacing-sm/2);
+  svg {
+    transition:all 0.3s ease;
+    font-size: $spacing-md * 1.8;
+    opacity: 0.3
+  }
+
+  &:hover{
+    svg{
+      opacity: 1;
+    }
+  }
+}

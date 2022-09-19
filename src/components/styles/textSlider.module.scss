@@ -1,0 +1,106 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.slider {
+  padding-top: $spacing-lg * 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  min-width: calc($lg/3);
+  width: fit-content;
+  &__title {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: $h3;
+    margin-bottom: $spacing-lg;
+  }
+  &__post {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translate(0, -2%);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s linear, transform 0.3s linear;
+    &__thumbnail {
+      img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-bottom:$spacing-sm;
+      }
+    }
+    &__content {
+      font-weight: bold;
+      font-size: $h5;
+      font-style: italic;
+      text-decoration: none;
+      color: $text-black;
+    }
+    &--open {
+      transform: translateY(0);
+      visibility: visible;
+      opacity: 1;
+    }
+
+    &--close {
+      width: 0;
+      height: 0;
+      transition: all 0s;
+    }
+  }
+  &__function {
+    display: none;
+  }
+
+  @include breakpoint(md) {
+    width: 80%;
+    flex-direction: row;
+    padding-top: $spacing-lg * 5;
+    height: $header-height;
+    &__title {
+      margin: 0;
+      justify-content: center;
+    }
+    &__post {
+      flex-direction: row;
+      transform: translate(-2%, 0);
+      &__thumbnail {
+        margin: 0 $spacing-md;
+        img{
+            margin-bottom:0;
+        }
+      }
+      &--open {
+        width:80%;
+        transform: translateX(0);
+      }
+    }
+
+    &__function {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      &__next {
+        @include TextSliderButton;
+      }
+      &__previous {
+        @include TextSliderButton;
+      }
+    }
+  }
+  @include breakpoint(lg) {
+    padding-top: $spacing-lg;
+  }
+  @include breakpoint(xl) {
+    width: 90%;
+  }
+  @include breakpoint(xxl) {
+    width: 100%;
+  }
+}

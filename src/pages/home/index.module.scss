@@ -1,17 +1,15 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-.index{
-    height: 100vh;
-    padding-top:$header-height;
-    margin:0 auto;
-    @include breakpoint(lg){
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        margin:0 $spacing-xl;
-    }
-    @include breakpoint(xl){
-        margin:0 $spacing-xl*2;
-    }
-    
+.index {
+  min-height: 100vh;
+  margin: 0 auto;
+  @include breakpoint(lg) {
+    padding-top: $header-height;
+    margin: 0 $spacing-xl;
+    display: flex;
+  }
+  @include breakpoint(xxl) {
+    margin: 0 $spacing-xl * 2;
+  }
 }

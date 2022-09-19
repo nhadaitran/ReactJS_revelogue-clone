@@ -1,10 +1,9 @@
 import styles from "./index.module.scss";
-// import Widget from "../../components/widget";
-// import Content from "../../components/content";
+import TextSlider from "../../components/textSlider";
 const Home = () => {
     return(
         <div className={styles.index}>
-            
+            <TextSlider/>
         </div>
     );
 };

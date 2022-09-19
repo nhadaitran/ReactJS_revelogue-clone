@@ -45,7 +45,6 @@
           font-weight: bolder;
           font-size: $h2 * 1.1;
           transition: color 0.3s;
-          margin-bottom: $spacing-sm;
           text-decoration: none;
 
           &:hover {
@@ -60,6 +59,7 @@
           }
         }
         &__description {
+          margin-top: $spacing-sm;
           font-size: $h5;
           line-height: 1.6;
           display: -webkit-box;
