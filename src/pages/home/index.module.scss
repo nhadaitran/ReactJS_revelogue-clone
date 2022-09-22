@@ -3,8 +3,11 @@
 
 .index {
   min-height: 100vh;
+  width:90%;
   margin: 0 auto;
   @include breakpoint(sm) {
+    width:auto;
+    // width:100%;
     margin: 0 $spacing-lg;
   }
   @include breakpoint(lg) {
