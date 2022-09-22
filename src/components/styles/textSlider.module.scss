@@ -26,6 +26,7 @@
     transform: translate(0, -2%);
     visibility: hidden;
     opacity: 0;
+    overflow: hidden;
     transition: visibility 0.3s, opacity 0.3s linear, transform 0.3s linear;
     &__thumbnail {
       img {
@@ -59,7 +60,7 @@
   }
 
   @include breakpoint(md) {
-    width: 80%;
+    width: 100%;
     flex-direction: row;
     padding-top: $spacing-lg * 5;
     height: $header-height;

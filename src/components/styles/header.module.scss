@@ -16,6 +16,7 @@
   }
   &__content {
     margin: 0 auto;
+    width:85%;
     padding: 0 $spacing-md;
     @include breakpoint(lg) {
       padding: 0 $spacing-lg;
@@ -28,7 +29,6 @@
     & > div {
       flex: 1;
       white-space: nowrap;
-
       &:nth-child(1) {
         justify-content: flex-start;
         display: initial;
@@ -40,20 +40,23 @@
       &:nth-child(2) {
         margin: 0;
         max-width: 100px;
+        max-width: fit-content;
         display: flex;
         justify-content: center;
+      }
+
+      &:nth-child(3) {
         @include breakpoint(lg) {
-          margin-left: $spacing-sm * 15;
+          max-width: fit-content;
         }
       }
 
       &:last-of-type {
         display: none;
         @include breakpoint(lg) {
-          margin-right: $spacing-sm * 15;
-          max-width: 100px;
+          margin: 0 0 0 auto;
+          max-width: fit-content;
           display: flex;
-          justify-content: flex-end;
         }
       }
     }
@@ -122,8 +125,8 @@
 
   @include breakpoint(lg) {
     position: static;
-    display: grid;
-    grid-template-columns: repeat(4, $spacing-lg * 3);
+    display: flex;
+    flex-wrap: wrap;
 
     &__item {
       border: none;
@@ -152,14 +155,6 @@
       }
     }
   }
-  @include breakpoint(xl) {
-    grid-template-columns: repeat(4, $spacing-lg * 4);
-  }
-  @include breakpoint(xxl) {
-    position: static;
-    display: flex;
-    align-items: center;
-  }
 }
 
 .search {
@@ -179,7 +174,7 @@
     transition: all 0.3s ease;
     &--open {
       visibility: visible;
-      width: $spacing-lg * 3;
+      width: $spacing-lg * 4;
       @include breakpoint(xl) {
         width: $spacing-lg * 5;
       }

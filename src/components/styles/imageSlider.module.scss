@@ -1,2 +1,104 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
+
+.slider {
+  display: flex;
+  flex-wrap: wrap;
+  margin: $spacing-lg 0;
+  align-items: center;
+  min-width: calc($lg/3);
+  &__thumbnail {
+    display: flex;
+    justify-content: center;
+    height: $image-slider-height;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-decoration: none;
+    overflow: hidden;
+    transition: width 1s, visibility 1s;
+    &__title {
+      color: $text-white;
+      font-weight: bold;
+      font-size: $h1;
+      margin-top: 400px;
+      width: 100%;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(
+        to bottom,
+        rgba(50, 50, 50, 0) 0%,
+        rgba(16, 15, 15, 0.91) 89%,
+        rgba(16, 15, 15, 0.93) 93%
+      ) !important;
+      @include breakpoint(md) {
+        margin-top: 480px;
+      }
+    }
+
+    &--open {
+      visibility: visible;
+      width: 100%;
+    }
+    &--close {
+      visibility: hidden;
+      width: 0;
+    }
+  }
+
+  &__indicator {
+    list-style-type: none;
+    padding: 0;
+    background: transparent;
+    width: fit-content;
+    display: flex;
+    margin: -100px auto 0;
+    justify-content: center;
+    white-space: nowrap;
+    &__item {
+      display: inline-block;
+      margin: calc($spacing-sm/3);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      background-size: 0;
+      & > svg {
+        vertical-align: middle;
+        color: $text-white;
+        width: 100%;
+      }
+      &--active {
+      }
+    }
+    @include breakpoint(md) {
+      width: 100%;
+      flex-wrap: none;
+      background: $bg-black;
+      justify-content: space-between;
+      margin: auto 0;
+      &__item {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: calc($spacing-sm/3);
+        height: $spacing-xl * 2;
+        width: 100%;
+        border-radius: $spacing-sm;
+        border: solid 1px $bg-white;
+        transition: all 0.3s ease;
+        filter: grayscale(100%);
+        & > svg {
+          display: none;
+        }
+
+        &:hover {
+          filter: none;
+        }
+
+        &--active {
+          filter: none;
+          transform: translateY(-5%);
+        }
+      }
+    }
+  }
+}

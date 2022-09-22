@@ -4,10 +4,12 @@
 .index {
   min-height: 100vh;
   margin: 0 auto;
+  @include breakpoint(sm) {
+    margin: 0 $spacing-lg;
+  }
   @include breakpoint(lg) {
     padding-top: $header-height;
     margin: 0 $spacing-xl;
-    display: flex;
   }
   @include breakpoint(xxl) {
     margin: 0 $spacing-xl * 2;
