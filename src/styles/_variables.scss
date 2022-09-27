@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
 $main-font: "Montserrat", sans-serif;
 
 $bg-white: rgba(255, 255, 255);
 $bg-black: rgba(0, 0, 0);
 $bg-inherit: rgba(38, 38, 38);
+
+$button: #25354c;
 
 $text-white: rgba(240, 240, 240);
 $text-black: rgba(80, 80, 80);
@@ -13,7 +15,7 @@ $text-link: rgba(215, 156, 116);
 $primary: rgba(0, 0, 255);
 $success: rgba(0, 255, 0);
 $alert: rgba(255, 0, 0);
-$inherit: rgba(0, 0, 0,0.5);
+$inherit: rgba(0, 0, 0, 0.5);
 $secondary: rgba(229, 234, 239);
 $muted: rgba(220, 220, 220);
 
@@ -25,20 +27,21 @@ $spacing-xl: 64px;
 $fs-md: 16px;
 $fs-lg: 20px;
 
-$h1:2em;
-$h2:1.5em;
-$h3:1.17em;
-$h4:1em;
-$h5:0.83em;
-$h6:0.67em;
+$h1: 2em;
+$h2: 1.5em;
+$h3: 1.17em;
+$h4: 1em;
+$h5: 0.83em;
+$h6: 0.67em;
 
 $header-height: 60px;
 $image-slider-height: 600px;
-$min-width:calc(62em/3.3);
+$min-width: calc(62em / 3.3);
+$height169: calc((100vw - 20px) * 0.5625);
+$width169: calc(100vw - 20px);
 
 $sm: 36em;
 $md: 48em;
 $lg: 62em;
 $xl: 75em;
 $xxl: 87.5em;
-

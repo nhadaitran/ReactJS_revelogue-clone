@@ -1,0 +1,86 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+.slider {
+  display: flex;
+  margin: $spacing-xl 0;
+  align-items: center;
+  &__content {
+    display: flex;
+    height: calc($height169/2);
+    min-height: $min-width;
+    min-width: $min-width;
+    width: $width169;    
+    @include breakpoint(md) {
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+    }
+
+    &__group {
+      height: 100%;
+      flex: 1 0 100%;
+      padding: $spacing-md;
+      gap: $spacing-md;
+      display: none;
+      flex-direction: row;
+      scroll-snap-align: start;
+      border: 1px solid $secondary;
+      @include breakpoint(md) {
+        display: flex;
+      }
+    }
+
+    &__mobile {
+      height: 100%;
+      flex: 1 0 100%;
+      padding: $spacing-sm;
+      gap: $spacing-sm;
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      scroll-snap-type: x mandatory;
+      border: 1px solid $secondary;
+      @include breakpoint(md) {
+        display: none;
+      }
+    }
+
+    &__item {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      flex: 1 0 100%;
+      scroll-snap-align: center;
+      @include breakpoint(md) {
+        scroll-snap-align: unset;
+        flex: 1 0 23%;
+      }
+    }
+  }
+  &__function {
+    &__left {
+      @include ButtonCardSlider;
+      position: absolute;
+      left: 0;
+      @include breakpoint(xl) {
+        left: 3%;
+      }
+    }
+    &__right {
+      @include ButtonCardSlider;
+      position: absolute;
+    
+      right: 0;
+      @include breakpoint(xl) {
+        right: 3%;
+      }
+    }
+  }
+}

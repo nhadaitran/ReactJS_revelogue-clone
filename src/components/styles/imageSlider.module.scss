@@ -10,31 +10,53 @@
   &__thumbnail {
     display: flex;
     justify-content: center;
-    height: $image-slider-height;
+    width: $width169;
+    height: $height169;
+    min-height: $spacing-xl*3;
+    max-height: $image-slider-height;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     text-decoration: none;
     overflow: hidden;
-    transition: width 1s, visibility 1s;
+    transition: width .5s, visibility 1s;
+    position:relative;
     &__title {
       color: $text-white;
       font-weight: bold;
-      font-size: $h3;
-      margin-top: 470px;
+      font-size: $h5;
+      position: absolute;
+      bottom:0;
+      height:35%;
       width: 100%;
       text-align: center;
       overflow: hidden;
+      transition: all 0.5s;
       background: linear-gradient(
         to bottom,
         rgba(50, 50, 50, 0) 0%,
         rgba(16, 15, 15, 0.91) 89%,
         rgba(16, 15, 15, 0.93) 93%
       ) !important;
+      @include breakpoint(sm) {
+        height:30%;
+        font-size: $h3;
+      }
       @include breakpoint(md) {
-        margin-top: 480px;
-        white-space: nowrap;
+        height:25%;
+        font-size: $h2;
+      }
+      @include breakpoint(lg) {
+        height:20%;
         font-size: $h1;
+      }
+      &--open {
+        visibility: visible;
+        opacity: 1;
+      }
+      &--close {
+        visibility: hidden;
+        opacity: 0;
       }
     }
 
@@ -49,12 +71,13 @@
   }
 
   &__indicator {
+    z-index: 1;
     list-style-type: none;
     padding: 0;
     background: transparent;
     width: fit-content;
     display: flex;
-    margin: -100px auto 0;
+    margin: -50px auto 0;
     justify-content: center;
     white-space: nowrap;
     &__item {

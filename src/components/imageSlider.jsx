@@ -32,7 +32,14 @@ const ImageSlider = () => {
           }`}
           style={{ backgroundImage: `url(${data.image_url}` }}
         >
-          <p to="article" className={styles.slider__thumbnail__title}>
+          <p
+            to="article"
+            className={`${styles.slider__thumbnail__title} ${
+              index === data.id
+                ? styles[`slider__thumbnail__title--open`]
+                : styles[`slider__thumbnail__title--close`]
+            }`}
+          >
             {data.value}
           </p>
         </NavLink>

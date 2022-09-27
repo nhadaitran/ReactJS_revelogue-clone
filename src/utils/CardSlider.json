@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "image_url": "https://picsum.photos/800/500",
+      "value": "Chỉ là anh nhớ em nhiều lắm",
+      "category":"Mỹ thuật"
+    },
+    {
+      "id": 1,
+      "image_url": "https://picsum.photos/800/501",
+      "value": "Món lạ miền Nam: Khi thức quà lạ đưa cảm xúc thăng hoa",
+      "category":"Văn hoá"
+    },
+    {
+      "id": 2,
+      "image_url": "https://picsum.photos/801/500",
+      "value": "Thử thách Thần Chết: Giữa hai thế giới và cuộc phiêu lưu đến Địa Ngục",
+      "category":"Nhiếp ảnh"
+    },
+    {
+      "id": 3,
+      "image_url": "https://picsum.photos/801/501",
+      "value": "John Wick 3: Parabellum – Chuẩn bị chiến tranh",
+      "category":"Viết lách"
+    },
+    {
+      "id": 4,
+      "image_url": "https://picsum.photos/800/499",
+      "value": "BoA: Xứng danh là huyền thoại nhạc Pop của nền âm nhạc xứ Hàn",
+      "category":"Mỹ thuật"
+    },
+    {
+      "id": 5,
+      "image_url": "https://picsum.photos/799/499",
+      "value": "BoA: Xứng danh là huyền thoại nhạc Pop của nền âm nhạc xứ Hàn",
+      "category":"Văn hoá"
+    },
+    {
+      "id": 6,
+      "image_url": "https://picsum.photos/799/500",
+      "value": "BoA: Xứng danh là huyền thoại nhạc Pop của nền âm nhạc xứ Hàn",
+      "category":"Nhiếp ảnh"
+    },
+    {
+      "id": 7,
+      "image_url": "https://picsum.photos/799/501",
+      "value": "BoA: Xứng danh là huyền thoại nhạc Pop của nền âm nhạc xứ Hàn",
+      "category":"Viết lách"
+    }
+  ]
+}
