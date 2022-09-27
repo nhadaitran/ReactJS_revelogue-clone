@@ -29,10 +29,10 @@ const CardSlider = () => {
   );
 };
 
-const CardItem = props => {
+const CardItem = (props) => {
   const data = fakedata.data;
-  let {startIndex, endIndex} = props
-  let subset = data.slice(startIndex, endIndex)
+  let { startIndex, endIndex } = props;
+  let subset = data.slice(startIndex, endIndex);
   return (
     <>
       {subset.map((data, i) => (
@@ -40,7 +40,12 @@ const CardItem = props => {
           key={i}
           className={styles.slider__content__item}
           style={{ backgroundImage: `url(${data.image_url}` }}
-        ></div>
+        >
+          <div className={styles.slider__content__item__category}>
+            <p>{data.category}</p>
+          </div>
+          <NavLink to="article" className={styles.slider__content__item__title}>{data.value}</NavLink>
+        </div>
       ))}
     </>
   );
