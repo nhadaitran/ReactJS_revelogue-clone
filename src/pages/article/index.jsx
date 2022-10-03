@@ -10,7 +10,9 @@ const Article = () => {
       <img className={styles.mobile} src={ImageMobile} alt="" />
       <div className={styles.index}>
         <Content />
-        <Widget />
+        <div className={styles.index__widget}>
+          <Widget />
+        </div>
       </div>
     </>
   );

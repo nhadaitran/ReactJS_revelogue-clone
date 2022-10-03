@@ -2,51 +2,43 @@
 @import "../../styles/mixins";
 
 .widget {
-  position: sticky;
-  top: 100px;
-  background: $bg-white;
-  height: 100%;
-  display: none;
-  // display: block;
-  padding: $spacing-md 0;
-  @include breakpoint(lg) {
-    display: block;
-  }
-  @include breakpoint(xl) {
-    padding: $spacing-md $spacing-sm 0;
-  }
-
-  &__title {
-    font-weight: bold;
-    font-size: $h3;
-    color: text;
-  }
-
   &__group {
     &__item {
       display: grid;
       grid-template-columns: auto 2fr;
-      padding-top: $spacing-md;
       border-bottom: 1px solid $secondary;
+      padding: $spacing-md 0;
+      @include breakpoint (md){
+        padding: $spacing-md;
+      }
       &__thumbnail {
-        padding: 0 $spacing-md $spacing-md 0;
-        & > img {
-          width: 70px;
-          height: 70px;
-          border-radius: $spacing-sm;
+        @include BackgroundImage;
+        caret-color: transparent;
+        margin: auto $spacing-md auto 0;
+        width: 100px;
+        height: 100px;
+        border-radius: $spacing-sm;
+        transition:0.5s; 
+        cursor: pointer;
+        &:hover{
+          filter:brightness(90%)
         }
       }
-
       &__content {
+        margin-top: $spacing-md;
         &__title {
           white-space: normal;
           text-decoration: none;
           color: $text-black;
           font-weight: bold;
           font-size: $h5;
+          transition:0.5s;
+          &:hover{
+            color:$text-link;
+          }
         }
         &__meta {
-          white-space: pre;
+          white-space: normal;
           display: flex;
           align-items: center;
           font-size: $h5;

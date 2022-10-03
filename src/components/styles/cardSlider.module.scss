@@ -61,28 +61,29 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      border-radius: $spacing-sm ;
+      border-radius: $spacing-sm;
       @include breakpoint(md) {
         scroll-snap-align: unset;
         flex: 1 0 23%;
       }
-      &:hover{
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+      &:hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+          rgba(0, 0, 0, 0.22) 0px 10px 10px;
       }
       &__category {
-        background:$button;
-        color:$text-white;
-        width:35%;
+        background: $button;
+        color: $text-white;
+        width: 35%;
         text-align: center;
-        padding:$spacing-sm;
-        border-radius:0  0  $spacing-sm $spacing-sm;
+        padding: $spacing-sm;
+        border-radius: 0 0 $spacing-sm $spacing-sm;
       }
 
       &__title {
         text-decoration: none;
         color: $text-white;
         background: $background-title;
-        font-weight: bold;
+        font-weight: bolder;
         font-size: $h5;
         text-align: center;
         width: 100%;
@@ -115,5 +116,22 @@
         right: 3%;
       }
     }
+  }
+}
+
+.cardGroup {
+  width:100%;
+  display: none;
+  @include breakpoint(md) {
+    display: flex;
+    align-items: center;
+  }
+}
+.cardGroupMobile {
+  align-items: center;
+  width:100%;
+  display: flex;
+  @include breakpoint(md) {
+    display: none;
   }
 }

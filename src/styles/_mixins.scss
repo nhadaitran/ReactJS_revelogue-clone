@@ -39,29 +39,62 @@
   cursor: pointer;
   margin: 0 calc($spacing-sm/2);
   svg {
-    transition:all 0.3s ease;
+    transition: all 0.3s ease;
     font-size: $spacing-md * 1.8;
-    opacity: 0.3
+    opacity: 0.3;
   }
 
-  &:hover{
-    svg{
+  &:hover {
+    svg {
       opacity: 1;
     }
   }
 }
 
-@mixin ButtonCardSlider{
+@mixin ButtonCardSlider {
   cursor: pointer;
-    width: calc($spacing-xl/1.3);
-    height: calc($spacing-xl/1.3);
-    border-radius: 50%;
-    border: none;
-    background-color: $button;
-    & > svg {
-      vertical-align: middle;
-      color: $text-white;
-      font-weight: bold;
-      font-size: xx-large;
-    }
+  width: calc($spacing-xl/1.3);
+  height: calc($spacing-xl/1.3);
+  border-radius: 50%;
+  border: none;
+  background-color: $button;
+  & > svg {
+    vertical-align: middle;
+    color: $text-white;
+    font-weight: bold;
+    font-size: xx-large;
+  }
+}
+@mixin BackgroundImage {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@mixin LineTitle{
+  p {
+    overflow: hidden;
+    text-align: start;
+    font-size: $h2;
+    font-weight: bolder;
+  }
+
+  p:before,
+  p:after {
+    background-color:$secondary;
+    content: "";
+    display: inline-block;
+    height: 2px;
+    position: relative;
+    vertical-align: middle;
+    width: 80%;
+  }
+
+  p:before {
+    margin-left: -80%;
+  }
+
+  p:after {
+    margin-right: -50%;
+  }
 }
