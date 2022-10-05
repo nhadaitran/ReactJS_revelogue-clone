@@ -82,16 +82,17 @@
   p:before,
   p:after {
     background-color:$secondary;
+    opacity: 0.7;
     content: "";
     display: inline-block;
     height: 2px;
     position: relative;
     vertical-align: middle;
-    width: 80%;
+    width: 85%;
   }
 
   p:before {
-    margin-left: -80%;
+    margin-left: -85%;
   }
 
   p:after {

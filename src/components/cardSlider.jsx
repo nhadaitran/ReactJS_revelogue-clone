@@ -10,7 +10,7 @@ const CardSlider = () => {
   const carouselMobile = React.useRef();
   const data = fakedata.data;
   const [index, setIndex] = React.useState(0);
-  const incrementCarousel = (value) => {
+  const incrementCarousel = React.useCallback((value) => {
     var isMobile = Math.abs(value / 2) === 1 ? true : false;
     if (!carousel.current) return;
     if (!carouselMobile.current) return;
@@ -53,7 +53,7 @@ const CardSlider = () => {
       }
     }
     setIndex((c) => c + delta);
-  };
+  },[data,index]);
   React.useEffect(() => {
     const SliderInterval = setInterval(() => {
       incrementCarousel(1);

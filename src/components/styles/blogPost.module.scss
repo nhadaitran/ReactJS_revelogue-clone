@@ -1,0 +1,104 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  @include LineTitle;
+  &__title {
+    flex: 1 0 90%;
+  }
+  &__function {
+    flex: 1 0 10%;
+    display: flex;
+    justify-content: center;
+    &__next {
+      @include TextSliderButton;
+    }
+    &__previous {
+      @include TextSliderButton;
+    }
+  }
+}
+.container {
+  min-height: $min-width;
+  min-width: $min-width;
+  margin: $spacing-lg 0 $spacing-xl;
+  &__group {
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    gap: 2%;
+    @include breakpoint(md) {
+      gap: 3%;
+    }
+    @include breakpoint(lg) {
+      gap: 5%;
+    }
+    &__item {
+      min-height: $min-width;
+      border-radius: $spacing-md $spacing-md;
+      scroll-snap-align: start;
+      height: calc($height169/1.8);
+      flex: 1 0 100%;
+      @include BackgroundImage;
+      @include breakpoint(md) {
+        flex: 1 0 48%;
+      }
+      @include breakpoint(lg) {
+        flex: 1 0 30%;
+      }
+
+      &__content {
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-end;
+        height: 100%;
+        background: $background-title-hover;
+        padding: 0 $spacing-lg $spacing-lg;
+        transition: all 0.5s;
+        &:hover {
+          background: $background-title;
+        }
+        &__title {
+          margin-bottom: $spacing-md;
+          text-decoration: none;
+          color: $text-white;
+          font-size: $h2;
+          font-weight: bold;
+          line-height: 1.2;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          transition: all 0.3s;
+          &:hover {
+            color: $text-link;
+          }
+        }
+        &__meta {
+          font-size: $h6;
+          color: $muted;
+          opacity: 0.7;
+        }
+
+        // &--active {
+        //   animation: moveUp 0.5s forwards;
+        // }
+      }
+    }
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    transform: translateX(25px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
