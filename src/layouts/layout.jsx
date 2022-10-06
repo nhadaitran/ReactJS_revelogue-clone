@@ -1,12 +1,14 @@
 import Header from '../components/header';
 import Footer from '../components/footer';
+import ModalAuth from '../components/modalAuth';
 
 const AppLayout = ({ children }) => {
-  return <div>
+  return <>
     <Header />
+    {/* <ModalAuth/> */}
     {children}
     <Footer />
-  </div>
+  </>
 };
 
 export default AppLayout;

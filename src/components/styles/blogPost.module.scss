@@ -6,7 +6,7 @@
   justify-content: space-between;
   @include LineTitle;
   &__title {
-    flex: 1 0 90%;
+    flex: 1 0 80%;
   }
   &__function {
     flex: 1 0 10%;
@@ -14,9 +14,21 @@
     justify-content: center;
     &__next {
       @include TextSliderButton;
+      & > svg {
+        opacity: 1;
+      }
+      &--disable{
+        cursor: default;
+      }
     }
     &__previous {
       @include TextSliderButton;
+      & > svg {
+        opacity: 1;
+      }
+      &--disable{
+        cursor: default;
+      }
     }
   }
 }
@@ -83,22 +95,7 @@
           color: $muted;
           opacity: 0.7;
         }
-
-        // &--active {
-        //   animation: moveUp 0.5s forwards;
-        // }
       }
     }
-  }
-}
-
-@keyframes moveUp {
-  0% {
-    transform: translateX(25px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
   }
 }

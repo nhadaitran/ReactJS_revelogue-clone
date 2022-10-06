@@ -6,7 +6,7 @@ import ArrowCircleRight from "@mui/icons-material/ArrowCircleRightOutlined";
 const BlogPost = (props) => {
   let { data, title } = props;
   const carousel = React.useRef();
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = React.useState(1);
   const incrementCarousel = React.useCallback(
     (value) => {
       if (!carousel.current) return;
@@ -22,41 +22,38 @@ const BlogPost = (props) => {
           0
         );
       }
-      if (index + value > data.length - 1) {
+      if (index + value > data.length - 2) {
         return;
-      } else if (index + value < 0) {
+      } else if (index + value <= 0) {
         return;
       } else {
         setIndex((c) => c + value);
-        return;
       }
     },
     [data, index]
   );
+  const preventScroll = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  };
   React.useEffect(() => {
+    carousel.current.addEventListener("wheel", preventScroll);
     const SliderInterval = setInterval(() => {
       incrementCarousel(1);
     }, 5000);
     return () => clearInterval(SliderInterval);
   }, [incrementCarousel]);
+
   return (
     <>
       <div className={styles.tabs}>
         <p className={styles.tabs__title}>{title}</p>
-        <div className={styles.tabs__function}>
-          <button
-            className={styles.tabs__function__previous}
-            onClick={() => incrementCarousel(-1)}
-          >
-            <ArrowCircleLeft />
-          </button>
-          <button
-            className={styles.tabs__function__next}
-            onClick={() => incrementCarousel(1)}
-          >
-            <ArrowCircleRight />
-          </button>
-        </div>
+        <FunctionButton
+          incrementCarousel={incrementCarousel}
+          index={index}
+          data={data}
+        />
       </div>
       <div className={styles.container}>
         <div className={styles.container__group} ref={carousel}>
@@ -66,13 +63,7 @@ const BlogPost = (props) => {
               className={styles.container__group__item}
               style={{ backgroundImage: `url(${value.image_url}` }}
             >
-              <div
-                className={`${styles.container__group__item__content} ${
-                  i === index
-                    ? styles[`container__group__item__content--active`]
-                    : {}
-                }`}
-              >
+              <div className={styles.container__group__item__content}>
                 <NavLink
                   to="article"
                   className={styles.container__group__item__content__title}
@@ -88,6 +79,47 @@ const BlogPost = (props) => {
         </div>
       </div>
     </>
+  );
+};
+const FunctionButton = (props) => {
+  let { incrementCarousel, index, data } = props;
+  return (
+    <div className={styles.tabs__function}>
+      {index === 1 ? (
+        <button
+          className={`${styles.tabs__function__previous} ${
+            styles[`tabs__function__previous--disable`]
+          }`}
+          disabled
+        >
+          <ArrowCircleLeft />
+        </button>
+      ) : (
+        <button
+          className={styles.tabs__function__previous}
+          onClick={() => incrementCarousel(-1)}
+        >
+          <ArrowCircleLeft />
+        </button>
+      )}
+      {index === data.length - 2 ? (
+        <button
+          className={`${styles.tabs__function__next} ${
+            styles[`tabs__function__next--disable`]
+          }`}
+          disabled
+        >
+          <ArrowCircleRight />
+        </button>
+      ) : (
+        <button
+          className={styles.tabs__function__next}
+          onClick={() => incrementCarousel(1)}
+        >
+          <ArrowCircleRight />
+        </button>
+      )}
+    </div>
   );
 };
 export default BlogPost;
