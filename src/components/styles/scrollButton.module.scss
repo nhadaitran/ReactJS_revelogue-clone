@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.button {
+  position: fixed;
+  width: 100%;
+  left: 95%;
+  bottom: $spacing-lg;
+  z-index: 1;
+  transition: all 0.5s;
+  @include ButtonCardSlider;
+  border:1px solid $muted;
+  display: none;
+  background: $bg-white;
+  opacity: 0;
+  & > svg {
+    color: $inherit;
+  }
+  &:hover {
+    & > svg {
+      color: $text-white;
+    }
+    background: $text-link;
+  }
+  &--scrolled {
+    display: block;
+    opacity: 1;
+  }
+}

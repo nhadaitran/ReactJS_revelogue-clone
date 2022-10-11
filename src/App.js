@@ -1,19 +1,25 @@
+import * as React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./layouts/layout";
 import Article from "./pages/article/index";
 import Category from "./pages/category/index";
 import Home from "./pages/home/index";
+import ModalAuth from './components/modalAuth';
+import ScrollButton from './components/scrollButton';
 // eslint-disable-next-line no-unused-vars
 import styles from "./styles/index.scss";
 function App() {
+  const [openAuth, setOpenAuth] = React.useState(false);
   return (
     <BrowserRouter>
       <AppLayout>
+        {openAuth && <ModalAuth closeAuth={setOpenAuth} />}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="article" element={<Article />} />
+          <Route path="article" element={<Article openAuth={setOpenAuth} />} />
           <Route path="category" element={<Category />} />
         </Routes>
+        <ScrollButton />
       </AppLayout>
     </BrowserRouter>
 

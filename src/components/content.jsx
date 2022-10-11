@@ -3,7 +3,8 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-const MainArticle = () => {
+const MainArticle = (props) => {
+  const { openAuth } = props;
   return (
     <div className={styles.container}>
       <div>
@@ -15,13 +16,14 @@ const MainArticle = () => {
         </p>
         <p className={styles.content__title}>
           Nguyễn Gia Trí: Người đưa sơn mài thành biểu tượng của mỹ thuật Việt
-          <SaveButton />
+          <SaveButton openAuth={openAuth} />
         </p>
         <div className={styles.content__writer}>
           <img alt="" src="https://picsum.photos/30"></img>
           <p>
             Thanh Hằng, 2 năm ago | <AccessTimeIcon /> 15 min read |
-            <RemoveRedEyeOutlinedIcon /> 213 <SaveButtonMobile />
+            <RemoveRedEyeOutlinedIcon /> 213{" "}
+            <SaveButtonMobile openAuth={openAuth} />
           </p>
         </div>
         <div className={styles.content__main}>abcdef</div>
@@ -29,17 +31,19 @@ const MainArticle = () => {
     </div>
   );
 };
-const SaveButton = () => {
+const SaveButton = (props) => {
+  const { openAuth } = props;
   return (
-    <button className={styles.save}>
+    <button className={styles.save} onClick={()=>openAuth(true)}>
       <BookmarkBorderIcon />
     </button>
   );
 };
 
-const SaveButtonMobile = () => {
+const SaveButtonMobile = (props) => {
+  const { openAuth } = props;
   return (
-    <button className={styles.save__moblie}>
+    <button className={styles.save__moblie} onClick={()=>openAuth(true)}>
       | <BookmarkBorderIcon />
     </button>
   );
