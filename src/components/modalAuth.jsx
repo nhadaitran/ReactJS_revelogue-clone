@@ -1,8 +1,11 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import styles from "./styles/modalAuth.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch } from "react-redux";
+import {login} from "../redux/userSlice";
 const ModalAuth = (props) => {
+  let dispatch = useDispatch();
   const { closeAuth } = props;
   const [isLogin, setIsLogin] = React.useState(true);
   //   const useOutsideClick = (ref) => {
@@ -22,6 +25,10 @@ const ModalAuth = (props) => {
   //   };
   const wrapperRef = React.useRef(null);
   //   useOutsideClick(wrapperRef);
+  const handleSubmitLogin = (formData) => {
+    dispatch(login(formData));
+  };
+
   return (
     <div className={styles.modal}>
       <ButtonClose closeAuth={closeAuth} />
@@ -45,7 +52,11 @@ const ModalAuth = (props) => {
           </button>
         </div>
         <div className={styles.modal__container__form}>
-          {isLogin ? <FormLogin /> : <FormRegister />}
+          {isLogin ? (
+            <FormLogin onSubmit={handleSubmitLogin} />
+          ) : (
+            <FormRegister />
+          )}
         </div>
       </div>
     </div>
@@ -61,18 +72,24 @@ const ButtonClose = (props) => {
   );
 };
 
-const FormLogin = () => {
+const FormLogin = ({ onSubmit }) => {
+  const emailRef = React.useRef();
+  const passwordRef = React.useRef();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit({email:emailRef.current.value, password:passwordRef.current.value})
+  };
   return (
-    <form autoComplete="off">
+    <form autoComplete="off" onSubmit={handleSubmit}>
       <div className={styles.modal__container__form__inputContainer}>
-        <label>Tên người đùng hoặc địa chỉ Email</label>
+        <label>Địa chỉ Email</label>
         <br />
-        <input type="text" name="username" required />
+        <input type="email" name="email" required ref={emailRef} />
       </div>
       <div className={styles.modal__container__form__inputContainer}>
         <label>Mật khẩu</label>
         <br />
-        <input type="password" name="password" required />
+        <input type="password" name="password" required ref={passwordRef} />
       </div>
       <div className={styles.modal__container__form__authContainer}>
         <div className={styles.modal__container__form__authContainer__remember}>
