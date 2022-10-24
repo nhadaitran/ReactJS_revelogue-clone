@@ -1,5 +1,9 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../redux/categorySlice";
+import Loading from "./loading";
+import { HTTP_STATUS } from "../redux/constants";
 import Logo from "../assets/images/logo.png";
 import styles from "./styles/header.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -8,12 +12,37 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 
 const Header = () => {
+  let dispatch = useDispatch();
+  const sArticle = useSelector((state) => state.article.status);
+  const sCategory = useSelector((state) => state.category.status);
+  const sUser = useSelector((state) => state.user);
+  const [loading, setLoading] = React.useState(false);
+
+  const categories = useSelector((state) => state.category.list);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
   const handleMenuToggler = () => setMenuOpen((p) => !p);
   const handleSearchToggler = () => setSearchOpen((p) => !p);
+  React.useEffect(() => {
+    if (categories.length === 0) {
+      dispatch(getCategories());
+    }
+  }, []);
+  React.useEffect(() => {
+    if (
+      sArticle === HTTP_STATUS.PENDING ||
+      sCategory === HTTP_STATUS.PENDING ||
+      sUser.status === HTTP_STATUS.PENDING
+    ) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [sArticle, sCategory, sUser.status]);
+
   return (
     <div className={styles.header}>
+      {loading ? <Loading /> : ""}
       <div className={styles.header__content}>
         <div>
           <button
@@ -38,69 +67,35 @@ const Header = () => {
             >
               Trang chủ
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? styles[`nav__item--active`] : styles.nav__item
-              }
-              to="/category"
-            >
-              Viết lách
-              <MoreVertIcon />
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? styles[`nav__item--active`] : styles.nav__item
-              }
-              to="/category"
-            >
-              Văn học
-              <MoreVertIcon />
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? styles[`nav__item--active`] : styles.nav__item
-              }
-              to="/category"
-            >
-              Điện ảnh
-              <MoreVertIcon />
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? styles[`nav__item--active`] : styles.nav__item
-              }
-              to="/category"
-            >
-              Nhiếp ảnh
-              <MoreVertIcon />
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? styles[`nav__item--active`] : styles.nav__item
-              }
-              to="/category"
-            >
-              Âm nhạc
-              <MoreVertIcon />
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? styles[`nav__item--active`] : styles.nav__item
-              }
-              to="/category"
-            >
-              Văn hoá
-              <MoreVertIcon />
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? styles[`nav__item--active`] : styles.nav__item
-              }
-              to="/category"
-            >
-              Mỹ thuật
-              <MoreVertIcon />
-            </NavLink>
+
+            {categories.map((data, i) =>
+              data.status ? (
+                <NavLink
+                  key={i}
+                  className={({ isActive }) =>
+                    isActive ? styles[`nav__item--active`] : styles.nav__item
+                  }
+                  to={`/danh-muc/${data.slug}`}
+                >
+                  {data.title}
+                  <MoreVertIcon />
+                </NavLink>
+              ) : (
+                ""
+              )
+            )}
+            {sUser.info ? (
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? styles[`nav__item--active`] : styles.nav__item
+                }
+                to="/upload"
+              >
+                Upload
+              </NavLink>
+            ) : (
+              ""
+            )}
           </nav>
         </div>
         <div>

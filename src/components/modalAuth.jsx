@@ -2,8 +2,9 @@ import * as React from "react";
 // import { NavLink } from "react-router-dom";
 import styles from "./styles/modalAuth.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch } from "react-redux";
-import {login} from "../redux/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { HTTP_STATUS } from "../redux/constants";
+import { login } from "../redux/userSlice";
 const ModalAuth = (props) => {
   let dispatch = useDispatch();
   const { closeAuth } = props;
@@ -28,7 +29,14 @@ const ModalAuth = (props) => {
   const handleSubmitLogin = (formData) => {
     dispatch(login(formData));
   };
-
+  const { status } = useSelector((state) => state.user);
+  React.useEffect(() => {
+    if (status === HTTP_STATUS.PENDING) {
+      closeAuth(false);
+    } else if (status === HTTP_STATUS.REJECTED) {
+      closeAuth(true);
+    }
+  }, [status]);
   return (
     <div className={styles.modal}>
       <ButtonClose closeAuth={closeAuth} />
@@ -77,7 +85,10 @@ const FormLogin = ({ onSubmit }) => {
   const passwordRef = React.useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({email:emailRef.current.value, password:passwordRef.current.value})
+    onSubmit({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    });
   };
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>

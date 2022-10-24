@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.index {
+  min-height: 100vh;
+  margin: 0 auto;
+  padding-top: $header-height;  
+}
