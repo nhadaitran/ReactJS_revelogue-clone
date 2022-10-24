@@ -17,36 +17,40 @@ const MainArticle = (props) => {
       dispatch(getArticle(slug));
     }
   }, []);
-  if (article !== undefined || article !== null) {
-    return (
-      <div className={styles.container}>
-        <div>
-          <ContentCopyIcon />
-        </div>
-        <div className={styles.content}>
-          <p className={styles.content__category}>
+  return (
+    <div className={styles.container}>
+      <div>
+        <ContentCopyIcon />
+      </div>
+      <div className={styles.content}>
+        <p className={styles.content__category}>
+          {article ? (
             <NavLink to={`/${article.category.slug}`}>
               {article.category.title}
             </NavLink>
+          ) : (
+            ""
+          )}
+        </p>
+        <p className={styles.content__title}>
+          {article ? article.title : ""}
+          <SaveButton openAuth={openAuth} />
+        </p>
+        <div className={styles.content__writer}>
+          <img alt="" src="https://picsum.photos/30"></img>
+          <p>
+            {article ? article.writer.fullname : ""}, 2 năm ago |{" "}
+            <AccessTimeIcon /> 15 min read |
+            <RemoveRedEyeOutlinedIcon /> 213{" "}
+            <SaveButtonMobile openAuth={openAuth} />
           </p>
-          <p className={styles.content__title}>
-            {article.title}
-            <SaveButton openAuth={openAuth} />
-          </p>
-          <div className={styles.content__writer}>
-            <img alt="" src="https://picsum.photos/30"></img>
-            <p>
-              {article.writer.fullname}, 2 năm ago | <AccessTimeIcon /> 15 min
-              read |
-              <RemoveRedEyeOutlinedIcon /> 213{" "}
-              <SaveButtonMobile openAuth={openAuth} />
-            </p>
-          </div>
-          <div className={styles.content__main}>{article.content}</div>
+        </div>
+        <div className={styles.content__main}>
+          {article ? article.content : ""}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 const SaveButton = (props) => {
   const { openAuth } = props;

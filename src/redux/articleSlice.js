@@ -18,10 +18,18 @@ export const getArticle = createAsyncThunk(
     }
 );
 
-export const getArticlesByCategoryID = createAsyncThunk(
-    'category/getArticlesByCategoryID',
+export const getArticlesByCategorySlug = createAsyncThunk(
+    'category/getArticlesByCategorySlug',
     async (value) => {
-        const { data } = await axios.get(`${API_URL}article/category/${value}`)
+        const { data } = await axios.get(`${API_URL}article/category/slug/${value}`)
+        return data;
+    }
+);
+
+export const uploadArticle = createAsyncThunk(
+    'category/uploadArticle',
+    async (value) => {
+        const { data } = await axios.post(`${API_URL}article`, value)
         return data;
     }
 );
@@ -65,14 +73,27 @@ export const articleSlice = createSlice({
         },
 
         //getArticlesByCategoryID
-        [getArticlesByCategoryID.pending](state) {
+        [getArticlesByCategorySlug.pending](state) {
             state.status = HTTP_STATUS.PENDING
         },
-        [getArticlesByCategoryID.fulfilled](state, { payload }) {
+        [getArticlesByCategorySlug.fulfilled](state, { payload }) {
             state.listByCategory.push(payload)
             state.status = HTTP_STATUS.FULFILLED
         },
-        [getArticlesByCategoryID.rejected](state, { payload }) {
+        [getArticlesByCategorySlug.rejected](state, { payload }) {
+            state.status = HTTP_STATUS.REJECTED
+            state.message = payload
+        },
+
+        // uploadArticle
+        [uploadArticle.pending](state) {
+            state.status = HTTP_STATUS.PENDING
+        },
+        [uploadArticle.fulfilled](state, { payload }) {
+            state.item = payload
+            state.status = HTTP_STATUS.FULFILLED
+        },
+        [uploadArticle.rejected](state, { payload }) {
             state.status = HTTP_STATUS.REJECTED
             state.message = payload
         },

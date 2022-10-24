@@ -1,8 +1,7 @@
 import * as React from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getArticlesByCategoryID } from "../redux/articleSlice";
-import { HTTP_STATUS } from "../redux/constants";
+import { getArticlesByCategorySlug } from "../redux/articleSlice";
 import styles from "./styles/category.module.scss";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -17,7 +16,7 @@ const Category = () => {
   );
   React.useEffect(() => {
     if (!articles) {
-      dispatch(getArticlesByCategoryID(category._id));
+      dispatch(getArticlesByCategorySlug(slug));
     }
   }, [category]);
   return (
