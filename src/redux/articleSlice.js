@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL, HTTP_STATUS } from './constants';
 import axios from 'axios';
-
+axios.defaults.withCredentials = true; 
 export const getArticles = createAsyncThunk(
     'category/getArticles',
     async () => {
@@ -29,7 +29,7 @@ export const getArticlesByCategorySlug = createAsyncThunk(
 export const uploadArticle = createAsyncThunk(
     'category/uploadArticle',
     async (value) => {
-        const { data } = await axios.post(`${API_URL}article`, value)
+        const { data } = await axios.post(`${API_URL}article`, value, {contentType: 'multipart/form-data'})
         return data;
     }
 );
@@ -93,9 +93,11 @@ export const articleSlice = createSlice({
             state.item = payload
             state.status = HTTP_STATUS.FULFILLED
         },
-        [uploadArticle.rejected](state, { payload }) {
+        [uploadArticle.rejected](state, { payload, error }) {
             state.status = HTTP_STATUS.REJECTED
-            state.message = payload
+            console.log(payload)
+            console.log(error)
+            // state.message = payload
         },
     },
 });

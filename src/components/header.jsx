@@ -2,8 +2,9 @@ import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../redux/categorySlice";
-import Loading from "./loading";
+import { logout } from "../redux/userSlice";
 import { HTTP_STATUS } from "../redux/constants";
+import Loading from "./loading";
 import Logo from "../assets/images/logo.png";
 import styles from "./styles/header.module.scss";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -28,6 +29,9 @@ const Header = () => {
       dispatch(getCategories());
     }
   }, []);
+  const handleLogout = () => {
+    dispatch(logout());
+  };
   React.useEffect(() => {
     if (
       sArticle === HTTP_STATUS.PENDING ||
@@ -85,14 +89,19 @@ const Header = () => {
               )
             )}
             {sUser.info ? (
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? styles[`nav__item--active`] : styles.nav__item
-                }
-                to="/upload"
-              >
-                Upload
-              </NavLink>
+              <>
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive ? styles[`nav__item--active`] : styles.nav__item
+                  }
+                  to="/upload"
+                >
+                  Upload
+                </NavLink>
+                <button className={styles.nav__item} onMouseDown={() => handleLogout()}>
+                  Đăng xuất
+                </button>
+              </>
             ) : (
               ""
             )}

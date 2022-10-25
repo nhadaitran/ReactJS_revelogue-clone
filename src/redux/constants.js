@@ -10,6 +10,6 @@ export const HTTP_STATUS = Object.freeze({
     // DELETE_FAILED: 'DELETE_FAILED',
     // EDITED: 'EDITED',
     // EDIT_FAILED: 'EDIT_FAILED',
-    // INSERTED: 'INSERTED',
+    // INSERTED: 'INSERTED',    
     // INSERT_FAILED: 'INSERT_FAILED',
 });

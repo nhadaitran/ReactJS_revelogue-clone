@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL, HTTP_STATUS } from './constants';
 import axios from 'axios';
-
+axios.defaults.withCredentials = true;
+let axiosConfig = {
+    withCredentials: true,
+}
 export const login = createAsyncThunk(
     'user/login',
     async (value, { rejectWithValue }) => {
@@ -9,11 +12,19 @@ export const login = createAsyncThunk(
         bodyData.append('email', value.email);
         bodyData.append('password', value.password);
         try {
-            const { data } = await axios.post(`${API_URL}user/login`, bodyData)
+            const { data } = await axios.post(`${API_URL}user/login`, bodyData, axiosConfig)
             return data;
         } catch (error) {
             return rejectWithValue(error.response.data)
         }
+    }
+);
+
+export const logout = createAsyncThunk(
+    'user/logout',
+    async () => {
+        const { data } = await axios.delete(`${API_URL}user/logout`)
+        return data;
     }
 );
 
@@ -24,15 +35,8 @@ export const userSlice = createSlice({
         status: null,
         message: null
     },
-    reducer: {
-        logout: (state) => {
-            state.info = null
-            state.status = null
-            state.message = null
-        },
-    },
     extraReducers: {
-        // LOGIN
+        // login
         [login.pending](state) {
             state.status = HTTP_STATUS.PENDING
         },
@@ -45,8 +49,22 @@ export const userSlice = createSlice({
             state.status = HTTP_STATUS.REJECTED
             state.message = payload.msg
         },
+        
+        // logout
+        [logout.pending](state) {
+            state.status = HTTP_STATUS.PENDING
+        },
+        [logout.fulfilled](state) {
+            state.info = null
+            state.message = null
+            state.status = null
+            
+        },
+        [logout.rejected](state, { payload }) {
+            state.status = HTTP_STATUS.REJECTED
+            state.message = null
+        },
     },
 });
 
-export const { logout } = userSlice.actions;
 export default userSlice.reducer;

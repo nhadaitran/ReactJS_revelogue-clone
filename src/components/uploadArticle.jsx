@@ -51,7 +51,7 @@ const UploadArticle = () => {
         {slug}
       </div>
       <div className={styles.container__inputContainer}>
-        <label forHtml="category">Category</label>
+        <label forhtml="category">Category</label>
         <br />
         <select name="category" id="category" ref={categoryRef}>
           {list.map(
