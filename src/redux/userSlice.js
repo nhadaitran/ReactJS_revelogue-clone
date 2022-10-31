@@ -44,12 +44,13 @@ export const userSlice = createSlice({
             state.info = payload.auth
             state.status = HTTP_STATUS.FULFILLED
             state.message = null
+            document.cookie = "accessToken=" + payload._token + ";  path=/";
         },
-        [login.rejected](state, { payload }) {
+        [login.rejected](state, { error }) {
             state.status = HTTP_STATUS.REJECTED
-            state.message = payload.msg
+            state.message = error
         },
-        
+
         // logout
         [logout.pending](state) {
             state.status = HTTP_STATUS.PENDING
@@ -58,9 +59,9 @@ export const userSlice = createSlice({
             state.info = null
             state.message = null
             state.status = null
-            
+
         },
-        [logout.rejected](state, { payload }) {
+        [logout.rejected](state) {
             state.status = HTTP_STATUS.REJECTED
             state.message = null
         },

@@ -1,6 +1,10 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {uploadArticle} from "../redux/articleSlice"
+import { uploadArticle } from "../redux/articleSlice";
+import { API_URL } from "../redux/constants";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import Editor from "ckeditor5-custom-build/build/ckeditor";
+import axios from "axios";
 import styles from "./styles/uploadArticle.module.scss";
 var slugify = require("slugify");
 
@@ -16,19 +20,38 @@ const UploadArticle = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('title',title);
-    formData.append('slug',slug);
-    formData.append('writer',info._id);
-    formData.append('category',categoryRef.current.value);
-    formData.append('content',contentRef.current.value);
-    formData.append('file',fileRef.current.files[0]);
+    formData.append("title", title);
+    formData.append("slug", slug);
+    formData.append("writer", info._id);
+    formData.append("category", categoryRef.current.value);
+    formData.append("content", contentRef.current.value);
+    formData.append("file", fileRef.current.files[0]);
     dispatch(uploadArticle(formData));
-    // console.log(categoryRef.current.value);
-    // console.log(contentRef.current.value);
-    // console.log(fileRef.current.files[0]);
-
-    
   };
+
+  const uploadAdapter = (loader) => {
+    return {
+      upload: () => {
+        return new Promise((resolve, reject) => {
+          const body = new FormData();
+          loader.file.then(async (file) => {
+            body.append("file", file);
+            await axios
+              .post(`${API_URL}upload`, body, {
+                contentType: "multipart/form-data",
+              })
+              .then((res) => {
+                resolve({default:`${res.data.url}`})
+              })
+              .catch((err) => {
+                reject(err);
+              });
+          });
+        });
+      },
+    };
+  };
+
   return (
     <form
       autoComplete="off"
@@ -68,6 +91,46 @@ const UploadArticle = () => {
         <label>Content</label>
         <br />
         <input type="text" name="content" required ref={contentRef} />
+        <CKEditor
+          config={{
+            toolbar: [
+              "heading",
+              "|",
+              "bold",
+              "italic",
+              "underline",
+              "blockquote",
+              "link",
+              "|",
+              "alignment:left",
+              "alignment:center",
+              "alignment:right",
+              "alignment:justify",
+              "|",
+              "imageupload",
+              "mediaembed",
+              "|",
+              "bulletedList",
+              "numberedList",
+              "|",
+              "undo",
+              "redo",
+            ],
+          }}
+          editor={Editor}
+          data="<p>Hello from CKEditor 5!</p>"
+          onReady={(editor) => {
+            editor.plugins.get("FileRepository").createUploadAdapter = (
+              loader
+            ) => {
+              return uploadAdapter(loader);
+            };
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            console.log(data);
+          }}
+        />
       </div>
       <div className={styles.container__inputContainer}>
         <label>Image</label>

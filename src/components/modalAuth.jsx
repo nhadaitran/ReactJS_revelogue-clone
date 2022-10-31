@@ -36,6 +36,7 @@ const ModalAuth = (props) => {
     } else if (status === HTTP_STATUS.REJECTED) {
       closeAuth(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
   return (
     <div className={styles.modal}>

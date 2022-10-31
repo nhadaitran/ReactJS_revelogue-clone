@@ -28,6 +28,7 @@ const Header = () => {
     if (categories.length === 0) {
       dispatch(getCategories());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const handleLogout = () => {
     dispatch(logout());
