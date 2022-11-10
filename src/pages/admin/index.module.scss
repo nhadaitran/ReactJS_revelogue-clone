@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.index {
+  min-height: 100vh;
+  margin: 0 auto;
+  @include breakpoint(lg) {
+    padding-top: $header-height*2;
+    margin: 0 $spacing-xl;
+    display: flex;
+  }
+  @include breakpoint(xl) {
+    margin: 0 $spacing-xl * 2;
+  }
+  &__widget {
+    display: none;
+    @include breakpoint(lg) {
+      display: block;
+    }
+  }
+}

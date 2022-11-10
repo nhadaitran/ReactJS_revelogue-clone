@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { API_URL, HTTP_STATUS } from './constants';
 import axios from 'axios';
-axios.defaults.withCredentials = true; 
+axios.defaults.withCredentials = true;
 export const getArticles = createAsyncThunk(
     'category/getArticles',
     async () => {
@@ -29,8 +29,15 @@ export const getArticlesByCategorySlug = createAsyncThunk(
 export const uploadArticle = createAsyncThunk(
     'category/uploadArticle',
     async (value) => {
-        const { data } = await axios.post(`${API_URL}article`, value, {contentType: 'multipart/form-data'})
+        const { data } = await axios.post(`${API_URL}article`, value, { contentType: 'multipart/form-data' })
         return data;
+    }
+);
+
+export const saveTempArticle = createAsyncThunk(
+    'category/saveTempArticle',
+    async (value) => {
+        return value;
     }
 );
 
@@ -39,12 +46,11 @@ export const articleSlice = createSlice({
     initialState: {
         list: [],
         listByCategory: [],
+        tempContent: null,
         item: null,
         status: null,
         message: null
     },
-    // reducer: {
-    // },
     extraReducers: {
         // getArticles
         [getArticles.pending](state) {
@@ -95,9 +101,20 @@ export const articleSlice = createSlice({
         },
         [uploadArticle.rejected](state, { payload, error }) {
             state.status = HTTP_STATUS.REJECTED
-            console.log(payload)
-            console.log(error)
+            // console.log(payload)
+            // console.log(error)
             // state.message = payload
+        },
+
+        // saveTempArticle
+        [saveTempArticle.pending](state){
+            state.tempContent = null;
+        },
+        [saveTempArticle.fulfilled](state, {payload}){
+            state.tempContent = payload
+        },
+        [saveTempArticle.rejected](state){
+            state.tempContent = null;
         },
     },
 });

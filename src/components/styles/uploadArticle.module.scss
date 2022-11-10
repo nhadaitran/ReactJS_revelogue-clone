@@ -1,7 +1,85 @@
 @import "../../styles/variables";
 @import "../../styles/mixins";
 
-.container{
+.container {
   background: $bg-white;
   min-width: calc($lg/3);
+  width: 60%;
+  margin: 0 auto;
+
+  &__inputContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-lg;
+    transition: all 0.3s;
+    & > input,
+    & > select {
+      border-radius: $spacing-sm;
+      width: 70%;
+      height: $spacing-lg;
+      border: 1px dashed $muted;
+
+      &:hover {
+        border: 1px dashed $text-black;
+      }
+    }
+
+    &__file {
+      width: 100%;
+      position: relative;
+      margin-bottom: $spacing-lg;
+
+      input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+      &__dummy {
+        display:flex;
+        height: $header-height * 5;
+        width: 100%;
+        padding: $spacing-md;
+        border: 2px dashed $text-black;
+        justify-content:center;
+        align-items:center;
+        transition: all 0.3s ease-in-out;
+        & > img {
+          max-height: 100%;
+          max-width: 100%;
+          object-fit: contain;
+        }
+      }
+      &:hover &__dummy {
+        background: $secondary;
+      }
+    }
+  }
+
+  &__buttonContainer {
+    margin-top: $spacing-lg;
+    display: flex;
+    justify-content: center;
+
+    & > input {
+      padding: $spacing-sm;
+      transition: all 0.3s;
+      cursor: pointer;
+      border-radius: $spacing-sm;
+      color: $inherit;
+      background: $text-link;
+      font-weight: bolder;
+      text-transform: uppercase;
+      &:hover {
+        color: $text-white;
+        background: rgba(255, 0, 0, 0.6);
+      }
+    }
+  }
 }

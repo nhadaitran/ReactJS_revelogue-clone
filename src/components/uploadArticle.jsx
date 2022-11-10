@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { uploadArticle } from "../redux/articleSlice";
+import { uploadArticle, saveTempArticle } from "../redux/articleSlice";
 import { API_URL } from "../redux/constants";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
@@ -11,12 +11,18 @@ var slugify = require("slugify");
 const UploadArticle = () => {
   let dispatch = useDispatch();
   const [title, setTitle] = React.useState("");
+  const [content, setContent] = React.useState("");
+  const [imageTitle, setImageTitle] = React.useState(null);
+
   const { list } = useSelector((state) => state.category);
   const { info } = useSelector((state) => state.user);
+  const tempContent = useSelector((state) => state.article.tempContent);
+
   let slug = slugify(title, { lower: true, strict: true });
+
   let categoryRef = React.useRef();
-  let contentRef = React.useRef();
   let fileRef = React.useRef();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -24,10 +30,22 @@ const UploadArticle = () => {
     formData.append("slug", slug);
     formData.append("writer", info._id);
     formData.append("category", categoryRef.current.value);
-    formData.append("content", contentRef.current.value);
+    formData.append("content", content);
     formData.append("file", fileRef.current.files[0]);
     dispatch(uploadArticle(formData));
   };
+
+  const handleImageChange = (e) => {
+    setImageTitle(URL.createObjectURL(e.target.files[0]));
+  };
+
+  React.useEffect(() => {
+    setContent(tempContent);
+  }, []);
+
+  React.useEffect(() => {
+    dispatch(saveTempArticle(content));
+  }, [content]);
 
   const uploadAdapter = (loader) => {
     return {
@@ -41,7 +59,7 @@ const UploadArticle = () => {
                 contentType: "multipart/form-data",
               })
               .then((res) => {
-                resolve({default:`${res.data.url}`})
+                resolve({ default: `${res.data.url}` });
               })
               .catch((err) => {
                 reject(err);
@@ -51,7 +69,6 @@ const UploadArticle = () => {
       },
     };
   };
-
   return (
     <form
       autoComplete="off"
@@ -59,23 +76,28 @@ const UploadArticle = () => {
       className={styles.container}
     >
       <div className={styles.container__inputContainer}>
-        <label>Title</label>
-        <br />
+        <label htmlFor="title">Tiêu đề:</label>
         <input
           type="text"
           name="title"
+          id="title"
           required
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
       <div className={styles.container__inputContainer}>
-        <label>Slug</label>
-        <br />
-        {slug}
+        <label htmlFor="slug">Slug tiêu đề:</label>
+        <input
+          type="text"
+          name="slug"
+          id="slug"
+          defaultValue={slug}
+          readOnly
+          required
+        />
       </div>
       <div className={styles.container__inputContainer}>
-        <label forhtml="category">Category</label>
-        <br />
+        <label htmlFor="category">Danh mục:</label>
         <select name="category" id="category" ref={categoryRef}>
           {list.map(
             (data, i) =>
@@ -87,57 +109,80 @@ const UploadArticle = () => {
           )}
         </select>
       </div>
-      <div className={styles.container__inputContainer}>
-        <label>Content</label>
-        <br />
-        <input type="text" name="content" required ref={contentRef} />
-        <CKEditor
-          config={{
-            toolbar: [
+
+      <div className={styles.container__inputContainer__file}>
+        <input
+          type="file"
+          name="file"
+          title="Click me to upload image"
+          required
+          ref={fileRef}
+          onChange={handleImageChange}
+        />
+        <div className={styles.container__inputContainer__file__dummy}>
+          {imageTitle === null ? (
+            <span>Please select an image</span>
+          ) : (
+            <img src={imageTitle} alt="imageTitle" />
+          )}
+        </div>
+      </div>
+
+      <CKEditor
+        config={{
+          toolbar: {
+            items: [
               "heading",
+              "|",
+              "alignment",
               "|",
               "bold",
               "italic",
+              "strikethrough",
               "underline",
-              "blockquote",
+              "subscript",
+              "superscript",
+              "|",
               "link",
-              "|",
-              "alignment:left",
-              "alignment:center",
-              "alignment:right",
-              "alignment:justify",
-              "|",
-              "imageupload",
-              "mediaembed",
               "|",
               "bulletedList",
               "numberedList",
+              "todoList",
+              "-",
+              "fontfamily",
+              "fontsize",
+              "fontColor",
+              "fontBackgroundColor",
+              "|",
+              "insertTable",
+              "|",
+              "outdent",
+              "indent",
+              "|",
+              "uploadImage",
+              "blockQuote",
               "|",
               "undo",
               "redo",
             ],
-          }}
-          editor={Editor}
-          data="<p>Hello from CKEditor 5!</p>"
-          onReady={(editor) => {
-            editor.plugins.get("FileRepository").createUploadAdapter = (
-              loader
-            ) => {
-              return uploadAdapter(loader);
-            };
-          }}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            console.log(data);
-          }}
-        />
-      </div>
-      <div className={styles.container__inputContainer}>
-        <label>Image</label>
-        <br />
-        <input type="file" name="file" required ref={fileRef} />
-      </div>
-      <div className={styles.container_buttonContainer}>
+            shouldNotGroupWhenFull: true,
+          },
+        }}
+        data={content}
+        editor={Editor}
+        onReady={(editor) => {
+          editor.plugins.get("FileRepository").createUploadAdapter = (
+            loader
+          ) => {
+            return uploadAdapter(loader);
+          };
+        }}
+        onChange={(event, editor) => {
+          setContent(editor.getData());
+        }}
+      />
+
+      <div className={styles.container__buttonContainer}>
         <input type="submit" value="Upload" />
       </div>
     </form>

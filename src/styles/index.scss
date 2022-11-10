@@ -14,3 +14,7 @@ body {
   min-height: 100vh;
   min-width: $min-width;
 }
+
+.ck-editor__editable {
+  min-height: 400px !important;
+}

@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.container {
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  height: $header-height;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 $spacing-md $spacing-md;
+  background:$bg-white;
+  &__group {
+    &__item {
+      padding: $spacing-md;
+      text-decoration: none;
+      color: $inherit;
+      transition: 0.3s ease color;
+
+      &--active {
+        color: $text-black;
+        text-decoration: none;
+        padding: $spacing-md;
+        text-decoration: none;
+        transition: 0.3s ease color;
+      }
+    }
+  }
+}

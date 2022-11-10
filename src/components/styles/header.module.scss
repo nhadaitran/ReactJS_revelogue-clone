@@ -16,7 +16,7 @@
   }
   &__content {
     margin: 0 auto;
-    width:85%;
+    width: 85%;
     padding: 0 $spacing-md;
     @include breakpoint(lg) {
       padding: 0 $spacing-lg;
@@ -71,6 +71,18 @@
     cursor: pointer;
     @include breakpoint(lg) {
       display: none;
+    }
+  }
+
+  &__adminBar {
+    transition: all 0.3s;
+    opacity: 0;
+    margin-top: -$header-height;
+    pointer-events: none;
+    &--open {
+      margin-top: 0;
+      opacity: 1;
+      pointer-events: auto;
     }
   }
 }

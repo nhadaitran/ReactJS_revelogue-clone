@@ -14,13 +14,11 @@
     height: $height169;
     min-height: $spacing-xl*3;
     max-height: $image-slider-height;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     text-decoration: none;
     overflow: hidden;
     transition: width .5s, visibility 1s;
     position:relative;
+    @include BackgroundImage;
     &__title {
       color: $text-white;
       font-weight: bold;

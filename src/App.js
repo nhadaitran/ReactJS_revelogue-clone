@@ -3,13 +3,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store, { persistor } from "./redux/store";
 import { PersistGate } from 'redux-persist/integration/react';
+// Layout
 import AppLayout from "./layouts/layout";
+
+// Page
 import Article from "./pages/article/index";
 import Category from "./pages/category/index";
 import Home from "./pages/home/index";
 import ModalAuth from './components/modalAuth';
 import UploadArticle from './pages/uploadArticle/index';
+import Admin from './pages/admin/index';
+
+// Component
 import ScrollButton from './components/scrollButton';
+
 // eslint-disable-next-line no-unused-vars
 import styles from "./styles/index.scss";
 function App() {
@@ -21,11 +28,14 @@ function App() {
           <AppLayout>
             {openAuth && <ModalAuth closeAuth={setOpenAuth} />}
             <Routes>
-              <Route exact path="/" element={<Home />} />
+              <Route path="/" element={<Home />} />
               {/* <Route path="article" element={<Article openAuth={setOpenAuth} />} /> */}
-              <Route exact path="bai-viet/:slug" element={<Article openAuth={setOpenAuth} />} />
-              <Route exact path="danh-muc/:slug" element={<Category />} />
-              <Route exact path="upload" element={<UploadArticle />} />
+              <Route path="bai-viet/:slug" element={<Article openAuth={setOpenAuth} />} />
+              <Route path="danh-muc/:slug" element={<Category />} />
+              <Route path="admin">
+                <Route index element={<Admin />} />
+                <Route path="upload" element={<UploadArticle />} />
+              </Route>
             </Routes>
             <ScrollButton />
           </AppLayout>
