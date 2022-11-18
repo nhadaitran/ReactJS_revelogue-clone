@@ -27,7 +27,7 @@ const MenuBar = (props) => {
                     className={({ isActive }) =>
                       isActive ? styles[`container__group__item--active`] : styles.container__group__item
                     }
-                    to="/admin/upload"
+                    to="/admin/status"
                   >
                     Duyệt bài viết
                   </NavLink>

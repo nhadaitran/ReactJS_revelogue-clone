@@ -2,16 +2,24 @@ import * as React from "react";
 import styles from "./styles/content.module.scss";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import parse from 'html-react-parser';
 import { getArticle } from "../redux/articleSlice";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import RemoveRedEyeOutlinedIcon from "@mui/icons-material/RemoveRedEyeOutlined";
-const MainArticle = (props) => {
-  const { openAuth } = props;
+import { StoreContext } from "../utils/store";
+const MainArticle = () => {
+  const value = React.useContext(StoreContext);
+  const openAuth = value.auth[1];
+  const data = value.preview[0];
   let dispatch = useDispatch();
   let { slug } = useParams();
-  const article = useSelector((state) => state.article.item);
+  let article = useSelector((state) => state.article.item);
+  if (data !== null) {
+    article = data;
+  }
+
   React.useEffect(() => {
     if (!article || article.slug !== slug || article === null) {
       dispatch(getArticle(slug));
@@ -46,7 +54,7 @@ const MainArticle = (props) => {
           </p>
         </div>
         <div className={styles.content__main}>
-          {article ? article.content : ""}
+          {article ? parse(article.content) : ""}
         </div>
       </div>
     </div>

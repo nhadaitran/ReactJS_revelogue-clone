@@ -3,7 +3,7 @@ import { API_URL, HTTP_STATUS } from './constants';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 export const getArticles = createAsyncThunk(
-    'category/getArticles',
+    'article/getArticles',
     async () => {
         const { data } = await axios.get(`${API_URL}article`)
         return data;
@@ -11,15 +11,23 @@ export const getArticles = createAsyncThunk(
 );
 
 export const getArticle = createAsyncThunk(
-    'category/getArticle',
+    'article/getArticle',
     async (value) => {
         const { data } = await axios.get(`${API_URL}article/${value}`)
         return data;
     }
 );
 
+export const getArticlesByStatus = createAsyncThunk(
+    'article/getArticlesByStatus',
+    async () => {
+        const { data } = await axios.get(`${API_URL}article/status`)
+        return data;
+    }
+);
+
 export const getArticlesByCategorySlug = createAsyncThunk(
-    'category/getArticlesByCategorySlug',
+    'article/getArticlesByCategorySlug',
     async (value) => {
         const { data } = await axios.get(`${API_URL}article/category/slug/${value}`)
         return data;
@@ -27,15 +35,24 @@ export const getArticlesByCategorySlug = createAsyncThunk(
 );
 
 export const uploadArticle = createAsyncThunk(
-    'category/uploadArticle',
+    'article/uploadArticle',
     async (value) => {
         const { data } = await axios.post(`${API_URL}article`, value, { contentType: 'multipart/form-data' })
         return data;
     }
 );
 
+export const updateStatusArticle = createAsyncThunk(
+    'article/updateStatusArticle',
+    async (value) => {
+        console.log(value)
+        // const { data } = await axios.post(`${API_URL}article/status/`, value, { contentType: 'multipart/form-data' })
+        // return data;
+    }
+);
+
 export const saveTempArticle = createAsyncThunk(
-    'category/saveTempArticle',
+    'article/saveTempArticle',
     async (value) => {
         return value;
     }
@@ -45,6 +62,7 @@ export const articleSlice = createSlice({
     name: 'article',
     initialState: {
         list: [],
+        listStatus: [],
         listByCategory: [],
         tempContent: null,
         item: null,
@@ -78,6 +96,19 @@ export const articleSlice = createSlice({
             state.message = payload
         },
 
+        // getArticlesByStatus
+        [getArticlesByStatus.pending](state) {
+            state.status = HTTP_STATUS.PENDING
+        },
+        [getArticlesByStatus.fulfilled](state, { payload }) {
+            state.listStatus = payload
+            state.status = HTTP_STATUS.FULFILLED
+        },
+        [getArticlesByStatus.rejected](state, { payload }) {
+            state.status = HTTP_STATUS.REJECTED
+            state.message = payload
+        },
+
         //getArticlesByCategoryID
         [getArticlesByCategorySlug.pending](state) {
             state.status = HTTP_STATUS.PENDING
@@ -99,21 +130,19 @@ export const articleSlice = createSlice({
             state.item = payload
             state.status = HTTP_STATUS.FULFILLED
         },
-        [uploadArticle.rejected](state, { payload, error }) {
+        [uploadArticle.rejected](state, { error }) {
             state.status = HTTP_STATUS.REJECTED
-            // console.log(payload)
-            // console.log(error)
-            // state.message = payload
+            state.message = error
         },
 
         // saveTempArticle
-        [saveTempArticle.pending](state){
+        [saveTempArticle.pending](state) {
             state.tempContent = null;
         },
-        [saveTempArticle.fulfilled](state, {payload}){
+        [saveTempArticle.fulfilled](state, { payload }) {
             state.tempContent = payload
         },
-        [saveTempArticle.rejected](state){
+        [saveTempArticle.rejected](state) {
             state.tempContent = null;
         },
     },

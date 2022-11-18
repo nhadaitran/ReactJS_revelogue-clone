@@ -3,14 +3,13 @@ import Widget from "../../components/widget";
 import Content from "../../components/content";
 import Breadcrumb from "../../components/breadcrumb";
 import ImageMobile from "../../assets/images/Web900x512.png";
-const Article = (props) => {
-  const { openAuth } = props;
+const Article = () => {
   return (
     <>
       <Breadcrumb />
       <img className={styles.mobile} src={ImageMobile} alt="" />
       <div className={styles.index}>
-        <Content openAuth={openAuth}/>
+        <Content/>
         <div className={styles.index__widget}>
           <Widget />
         </div>

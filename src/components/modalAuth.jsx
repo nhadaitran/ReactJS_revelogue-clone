@@ -1,13 +1,14 @@
 import * as React from "react";
-// import { NavLink } from "react-router-dom";
 import styles from "./styles/modalAuth.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { HTTP_STATUS } from "../redux/constants";
 import { login } from "../redux/userSlice";
-const ModalAuth = (props) => {
+import { StoreContext } from "../utils/store";
+const ModalAuth = () => {
   let dispatch = useDispatch();
-  const { closeAuth } = props;
+  const value = React.useContext(StoreContext);
+  const closeModal = value.auth[1];
   const [isLogin, setIsLogin] = React.useState(true);
   //   const useOutsideClick = (ref) => {
   //     React.useEffect(() => {
@@ -32,15 +33,15 @@ const ModalAuth = (props) => {
   const { status } = useSelector((state) => state.user);
   React.useEffect(() => {
     if (status === HTTP_STATUS.PENDING) {
-      closeAuth(false);
+      closeModal(false);
     } else if (status === HTTP_STATUS.REJECTED) {
-      closeAuth(true);
+      closeModal(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
   return (
     <div className={styles.modal}>
-      <ButtonClose closeAuth={closeAuth} />
+      <ButtonClose closeModal={closeModal} />
       <div className={styles.modal__container} ref={wrapperRef}>
         <div className={styles.modal__container__auth}>
           <button
@@ -73,9 +74,9 @@ const ModalAuth = (props) => {
 };
 
 const ButtonClose = (props) => {
-  const { closeAuth } = props;
+  const { closeModal } = props;
   return (
-    <button className={styles.modal__button} onClick={() => closeAuth(false)}>
+    <button className={styles.modal__button} onClick={() => closeModal(false)}>
       <CloseIcon />
     </button>
   );

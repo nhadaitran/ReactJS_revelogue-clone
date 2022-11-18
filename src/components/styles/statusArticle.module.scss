@@ -1,0 +1,25 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.container {
+  background: $bg-white;
+  min-width: calc($lg/3);
+  width: 80%;
+  margin: 0 auto;
+}
+
+.status {
+  color: $text-white;
+  text-transform: uppercase;
+  font-size: $h3;
+  border-radius: $spacing-sm;
+  padding: $spacing-sm;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 0, 0, 0.5);
+  transition: all 0.3s;
+  &:hover {
+    background: $text-link;
+    color: $text-black;
+  }
+}
