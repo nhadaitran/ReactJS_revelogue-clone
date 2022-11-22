@@ -22,16 +22,16 @@
       scroll-snap-type: x mandatory;
     }
 
-    &__group {
-      height: 100%;
+    &__group {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      height: 100%;      
       flex: 1 0 100%;
       padding: $spacing-md;
       gap: $spacing-md;
-      display: none;
+      display: none;                                                                                                                                                                
       flex-direction: row;
       scroll-snap-align: start;
       border: 1px solid $secondary;
-      @include breakpoint(md) {
+      @include breakpoint(md) {                                                     
         display: flex;
       }
     }

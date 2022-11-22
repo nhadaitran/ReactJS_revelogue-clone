@@ -1,6 +1,5 @@
 import styles from "./index.module.scss";
-const Admin = (props) => {
-  const { openAuth } = props;
+const Admin = () => {
   return (
     <div className={styles.index}>
       abc

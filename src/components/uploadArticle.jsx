@@ -6,7 +6,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import Editor from "ckeditor5-custom-build/build/ckeditor";
 import axios from "axios";
 import styles from "./styles/uploadArticle.module.scss";
-var slugify = require("slugify");
+import slugify from "slugify";
 
 const UploadArticle = () => {
   let dispatch = useDispatch();
@@ -40,12 +40,13 @@ const UploadArticle = () => {
   };
 
   React.useEffect(() => {
-    setContent(tempContent);
+    tempContent !== null ? setContent(tempContent) : setContent("");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
     dispatch(saveTempArticle(content));
-  }, [content]);
+  }, [content, dispatch]);
 
   const uploadAdapter = (loader) => {
     return {
@@ -160,6 +161,7 @@ const UploadArticle = () => {
               "indent",
               "|",
               "uploadImage",
+              "mediaEmbed",
               "blockQuote",
               "|",
               "undo",

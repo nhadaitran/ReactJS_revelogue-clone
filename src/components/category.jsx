@@ -1,11 +1,16 @@
 import * as React from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import parse from "html-react-parser";
+import moment from "moment";
 import { getArticlesByCategorySlug } from "../redux/articleSlice";
 import styles from "./styles/category.module.scss";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { StoreContext } from "../utils/store";
 const Category = () => {
+  const value = React.useContext(StoreContext);
+  const setBreadcrumb = value.breadcrumb[1];
   let dispatch = useDispatch();
   let { slug } = useParams();
   const category = useSelector((state) =>
@@ -19,6 +24,12 @@ const Category = () => {
       dispatch(getArticlesByCategorySlug(slug));
     }
   }, [category]);
+
+  React.useEffect(() => {
+    var arr = [];
+    arr.push(category.title);
+    setBreadcrumb(arr);
+  }, [category, setBreadcrumb]);
   return (
     <div className={styles.container}>
       <div className={styles.container__group}>
@@ -41,10 +52,11 @@ const Category = () => {
                   <p
                     className={styles.container__group__card__body__description}
                   >
-                    {data.content}
+                    {parse(data.content)}
                   </p>
                   <p className={styles.container__group__card__body__meta}>
-                    Thanh Hằng, 2 năm ago | <AccessTimeIcon /> 15 min read
+                    {data.writer.fullname}, {moment(data.updated_at).fromNow()}{" "}
+                    | <AccessTimeIcon /> 15 min read
                   </p>
                 </div>
               </div>

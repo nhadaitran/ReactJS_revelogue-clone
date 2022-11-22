@@ -9,7 +9,7 @@
   }
   ol {
     margin: 0 auto;
-    padding: 0 $spacing-md*1.5;
+    padding: 0 $spacing-md * 1.5;
     @include breakpoint(lg) {
       padding-top: $header-height;
       margin: 0 $spacing-xl * 2;
@@ -17,13 +17,17 @@
   }
 
   li {
-    font-size: $h5;
-    color: $inherit;
     display: inline;
-
+    & > a {
+      text-decoration: none;
+      font-size: $h5;
+      color: $inherit;
+    }
     &:last-child {
-      font-weight: bold;
-      color: $text-black;
+      & > a {
+        font-weight: bold;
+        color: $text-black;
+      }
     }
   }
 

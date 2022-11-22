@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./styles/menuBar.module.scss";
 
 const MenuBar = (props) => {
-    const {role} = props;
+    // const {role} = props;
     return(
         <div className={styles.container}>
             <div className={styles.container__group}>

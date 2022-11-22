@@ -4,12 +4,14 @@ export const StoreContext = React.createContext();
 
 const StoreProvider = ({ children }) => {
   const [openAuth, setOpenAuth] = React.useState(false);
-    const [previewData, setPreviewData] = React.useState(null);
+  const [previewData, setPreviewData] = React.useState(null);
+  const [breadcrumbs, setBreadcrumbs] = React.useState([]);
 
-    const value = {
-      auth: [openAuth, setOpenAuth],
-      preview: [previewData, setPreviewData],
-    };
+  const value = {
+    auth: [openAuth, setOpenAuth],
+    preview: [previewData, setPreviewData],
+    breadcrumb: [breadcrumbs, setBreadcrumbs],
+  };
 
   return (
     <StoreContext.Provider value={value}>{children}</StoreContext.Provider>

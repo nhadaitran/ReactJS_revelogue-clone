@@ -76,7 +76,7 @@ const ModalAuth = () => {
 const ButtonClose = (props) => {
   const { closeModal } = props;
   return (
-    <button className={styles.modal__button} onClick={() => closeModal(false)}>
+    <button className={styles.modal__button} onClick={() => closeModal(null)}>
       <CloseIcon />
     </button>
   );
