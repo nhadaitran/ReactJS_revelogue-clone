@@ -1,12 +1,11 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-import fakedata from "../utils/Dataslider.json";
 import styles from "./styles/textSlider.module.scss";
 import ArrowCircleLeft from "@mui/icons-material/ArrowCircleLeftOutlined";
 import ArrowCircleRight from "@mui/icons-material/ArrowCircleRightOutlined";
 
-const TextSlider = () => {
-  const data = fakedata.data;
+const TextSlider = (props) => {
+  const data = props.data;
   const [index, setIndex] = React.useState(0);
   React.useEffect(() => {
     const SliderInterval = setInterval(() => {
@@ -37,7 +36,7 @@ const TextSlider = () => {
         <div
           key={i}
           className={`${styles.slider__post} ${
-            index === data.id
+            index === i
               ? styles[`slider__post--open`]
               : styles[`slider__post--close`]
           }`}
@@ -45,8 +44,8 @@ const TextSlider = () => {
           <div className={styles.slider__post__thumbnail}>
             <img src={`${data.image_url}`} alt="" />
           </div>
-          <NavLink to="article" className={styles.slider__post__content}>
-            {data.value}
+          <NavLink to={`/bai-viet/${data.slug}`} className={styles.slider__post__content}>
+            {data.title}
           </NavLink>
         </div>
       ))}

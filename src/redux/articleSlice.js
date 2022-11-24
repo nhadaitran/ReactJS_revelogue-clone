@@ -2,6 +2,12 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { API_URL, HTTP_STATUS } from "./constants";
 import axios from "axios";
 axios.defaults.withCredentials = true;
+
+export const getHomes = createAsyncThunk("article/getHomes", async () => {
+  const { data } = await axios.get(`${API_URL}article/home`);
+  return data;
+});
+
 export const getArticles = createAsyncThunk("article/getArticles", async () => {
   const { data } = await axios.get(`${API_URL}article`);
   return data;
@@ -70,12 +76,30 @@ export const articleSlice = createSlice({
     list: [],
     listStatus: [],
     listByCategory: [],
+    listHome: [],
     tempContent: null,
     item: null,
     status: null,
+    homeStatus: null,
     message: null,
   },
   extraReducers: {
+    // getHomes
+    [getHomes.pending](state) {
+      state.status = HTTP_STATUS.PENDING;
+      state.homeStatus = null;
+    },
+    [getHomes.fulfilled](state, { payload }) {
+      state.listHome = payload;
+      state.homeStatus = HTTP_STATUS.FULFILLED;
+      state.status = HTTP_STATUS.FULFILLED;
+    },
+    [getHomes.rejected](state, { payload }) {
+      state.status = HTTP_STATUS.REJECTED;
+      state.message = payload;
+      state.homeStatus = null;
+    },
+
     // getArticles
     [getArticles.pending](state) {
       state.status = HTTP_STATUS.PENDING;

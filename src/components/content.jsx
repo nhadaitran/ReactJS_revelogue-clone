@@ -31,8 +31,10 @@ const MainArticle = () => {
   }, []);
   React.useEffect(() => {
     var arr = [];
-    arr.push(article.category.title);
-    arr.push(article.title);
+    if (Boolean(article)) {
+      arr.push(article.category.title);
+      arr.push(article.title);
+    }
     setBreadcrumb(arr);
   }, [article, setBreadcrumb]);
   return (
@@ -40,7 +42,7 @@ const MainArticle = () => {
       <div>
         <ContentCopyIcon />
       </div>
-      {article !== null ? (
+      {Boolean(article) && (
         <div className={styles.content}>
           <p className={styles.content__category}>
             {
@@ -64,8 +66,6 @@ const MainArticle = () => {
           </div>
           <div className={styles.content__main}>{parse(article.content)}</div>
         </div>
-      ) : (
-        ""
       )}
     </div>
   );

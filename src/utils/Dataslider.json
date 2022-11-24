@@ -3,27 +3,27 @@
     {
       "id": 0,
       "image_url": "https://picsum.photos/49/50",
-      "value": "Chỉ là anh nhớ em nhiều lắm"
+      "title": "Chỉ là anh nhớ em nhiều lắm"
     },
     {
       "id": 1,
       "image_url": "https://picsum.photos/50/49",
-      "value": "Món lạ miền Nam: Khi thức quà lạ đưa cảm xúc thăng hoa"
+      "title": "Món lạ miền Nam: Khi thức quà lạ đưa cảm xúc thăng hoa"
     },
     {
       "id": 2,
       "image_url": "https://picsum.photos/51/50",
-      "value": "Thử thách Thần Chết: Giữa hai thế giới và cuộc phiêu lưu đến Địa Ngục"
+      "title": "Thử thách Thần Chết: Giữa hai thế giới và cuộc phiêu lưu đến Địa Ngục"
     },
     {
       "id": 3,
       "image_url": "https://picsum.photos/50/51",
-      "value": "John Wick 3: Parabellum – Chuẩn bị chiến tranh"
+      "title": "John Wick 3: Parabellum – Chuẩn bị chiến tranh"
     },
     {
       "id": 4,
       "image_url": "https://picsum.photos/51/51",
-      "value": "BoA: Xứng danh là huyền thoại nhạc Pop của nền âm nhạc xứ Hàn"
+      "title": "BoA: Xứng danh là huyền thoại nhạc Pop của nền âm nhạc xứ Hàn"
     }
   ]
 }

@@ -1,59 +1,61 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
-import fakedata from "../utils/CardSlider.json";
 import styles from "./styles/cardSlider.module.scss";
 import PrevIcon from "@mui/icons-material/NavigateBefore";
 import NextIcon from "@mui/icons-material/NavigateNext";
 
-const CardSlider = () => {
+const CardSlider = (props) => {
   const carousel = React.useRef();
   const carouselMobile = React.useRef();
-  const data = fakedata.data;
+  const data = props.data;
   const [index, setIndex] = React.useState(0);
-  const incrementCarousel = React.useCallback((value) => {
-    var isMobile = Math.abs(value / 2) === 1 ? true : false;
-    if (!carousel.current) return;
-    if (!carouselMobile.current) return;
-    var width = isMobile
-      ? carouselMobile.current.offsetWidth
-      : carousel.current.offsetWidth;
-    var length = isMobile ? data.length - 1 : 1;
-    var delta = isMobile ? value / 2 : value;
-    if (index + delta > length) {
-      setIndex(0);
+  const incrementCarousel = React.useCallback(
+    (value) => {
+      var isMobile = Math.abs(value / 2) === 1 ? true : false;
+      if (!carousel.current) return;
+      if (!carouselMobile.current) return;
+      var width = isMobile
+        ? carouselMobile.current.offsetWidth
+        : carousel.current.offsetWidth;
+      var length = isMobile ? data.length - 1 : 1;
+      var delta = isMobile ? value / 2 : value;
+      if (index + delta > length) {
+        setIndex(0);
+        if (isMobile) {
+          carouselMobile.current.scrollTo(0, 0);
+          carousel.current.scrollTo(0, 0);
+        } else {
+          carousel.current.scrollTo(0, 0);
+        }
+        return;
+      } else if (index + delta < 0) {
+        setIndex(length);
+        if (isMobile) {
+          carouselMobile.current.scrollTo(width * length, 0);
+        } else {
+          carousel.current.scrollTo(width, 0);
+        }
+        return;
+      }
       if (isMobile) {
-        carouselMobile.current.scrollTo(0, 0);
-        carousel.current.scrollTo(0, 0);
+        if (carouselMobile.current) {
+          carouselMobile.current.scrollTo(
+            carouselMobile.current.scrollLeft + width * delta,
+            0
+          );
+        }
       } else {
-        carousel.current.scrollTo(0, 0);
+        if (carousel.current) {
+          carousel.current.scrollTo(
+            carousel.current.scrollLeft + width * delta,
+            0
+          );
+        }
       }
-      return;
-    } else if (index + delta < 0) {
-      setIndex(length);
-      if (isMobile) {
-        carouselMobile.current.scrollTo(width * length, 0);
-      } else {
-        carousel.current.scrollTo(width, 0);
-      }
-      return;
-    }
-    if (isMobile) {
-      if (carouselMobile.current) {
-        carouselMobile.current.scrollTo(
-          carouselMobile.current.scrollLeft + width * delta,
-          0
-        );
-      }
-    } else {
-      if (carousel.current) {
-        carousel.current.scrollTo(
-          carousel.current.scrollLeft + width * delta,
-          0
-        );
-      }
-    }
-    setIndex((c) => c + delta);
-  },[data,index]);
+      setIndex((c) => c + delta);
+    },
+    [data, index]
+  );
   React.useEffect(() => {
     const SliderInterval = setInterval(() => {
       incrementCarousel(1);
@@ -142,10 +144,13 @@ const CardItem = (props) => {
           style={{ backgroundImage: `url(${data.image_url}` }}
         >
           <div className={styles.slider__content__item__category}>
-            <p>{data.category}</p>
+            <p>{data.category.title}</p>
           </div>
-          <NavLink to="article" className={styles.slider__content__item__title}>
-            {data.value}
+          <NavLink
+            to={`/bai-viet/${data.slug}`}
+            className={styles.slider__content__item__title}
+          >
+            {data.title}
           </NavLink>
         </div>
       ))}

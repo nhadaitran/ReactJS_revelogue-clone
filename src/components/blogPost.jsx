@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./styles/blogPost.module.scss";
 import ArrowCircleLeft from "@mui/icons-material/ArrowCircleLeftOutlined";
 import ArrowCircleRight from "@mui/icons-material/ArrowCircleRightOutlined";
+import moment from "moment";
 const BlogPost = (props) => {
   let { data, title } = props;
   const carousel = React.useRef();
@@ -65,13 +66,13 @@ const BlogPost = (props) => {
             >
               <div className={styles.container__group__item__content}>
                 <NavLink
-                  to="article"
+                  to={`/bai-viet/${value.slug}`}
                   className={styles.container__group__item__content__title}
                 >
-                  {value.value}
+                  {value.title}
                 </NavLink>
                 <p className={styles.container__group__item__content__meta}>
-                  Thanh Tiêu, 7 tháng ago
+                  {value.writer.fullname}, {moment(value.updated_at).fromNow()}
                 </p>
               </div>
             </div>
