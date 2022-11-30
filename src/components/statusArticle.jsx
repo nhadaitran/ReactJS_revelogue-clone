@@ -18,8 +18,7 @@ const StatusArticle = () => {
     if (articles.length === 0) {
       dispatch(getArticlesByStatus());
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [articles.length, dispatch]);
 
   const gridRef = React.useRef();
 

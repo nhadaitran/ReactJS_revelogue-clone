@@ -14,7 +14,7 @@ const UploadArticle = () => {
   const [content, setContent] = React.useState("");
   const [imageTitle, setImageTitle] = React.useState(null);
 
-  const { list } = useSelector((state) => state.category);
+  const { listUnNested } = useSelector((state) => state.category);
   const { info } = useSelector((state) => state.user);
   const tempContent = useSelector((state) => state.article.tempContent);
 
@@ -41,7 +41,7 @@ const UploadArticle = () => {
 
   React.useEffect(() => {
     tempContent !== null ? setContent(tempContent) : setContent("");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   React.useEffect(() => {
@@ -100,7 +100,7 @@ const UploadArticle = () => {
       <div className={styles.container__inputContainer}>
         <label htmlFor="category">Danh mục:</label>
         <select name="category" id="category" ref={categoryRef}>
-          {list.map(
+          {listUnNested.map(
             (data, i) =>
               data.status && (
                 <option key={i} value={`${data._id}`}>

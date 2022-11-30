@@ -7,7 +7,6 @@ import moment from "moment";
 const BlogWidget = (props) => {
   const data = props.data;
   const [blog, setBlog] = React.useState(data[0]);
-  console.log(blog)
   return (
     <>
       <div className={styles.tabs}>

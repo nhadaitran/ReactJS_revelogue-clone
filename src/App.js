@@ -22,6 +22,7 @@ import Admin from "./pages/admin/index";
 import ScrollButton from "./components/scrollButton";
 import ModalAuth from "./components/modalAuth";
 import ModalPreview from "./components/modalPreview";
+import ModalAlert from "./components/modalAlert";
 
 // Style // eslint-disable-next-line no-unused-vars
 import styles from "./styles/index.scss";
@@ -35,11 +36,14 @@ function App() {
           <AppLayout>
             {value.auth[0] && <ModalAuth />}
             {value.preview[0] !== null && <ModalPreview />}
+            {value.alert[0] !== null && <ModalAlert />}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="article" element={<Article />} />
               <Route path="bai-viet/:slug" element={<Article />} />
               <Route path="danh-muc/:slug" element={<Category />} />
+              <Route path="danh-muc/:slug/:subSlug" element={<Category />} />
+              <Route path="danh-muc/:slug/:subSlug/:subSubSlug" element={<Category />} />
               <Route path="admin">
                 <Route index element={<Admin />} />
                 <Route path="upload" element={<UploadArticle />} />

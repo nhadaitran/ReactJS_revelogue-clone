@@ -19,6 +19,7 @@ const MainArticle = () => {
   let location = useLocation();
   let { slug } = useParams();
   let article = useSelector((state) => state.article.item);
+  let categories = useSelector((state) => state.category.listUnNested);
   if (data !== null) {
     article = data;
   }
@@ -27,11 +28,21 @@ const MainArticle = () => {
     if (!article || article.slug !== slug || article === null) {
       location.pathname.search("admin") !== 1 && dispatch(getArticle(slug));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [article, dispatch, location.pathname, slug]);
   React.useEffect(() => {
     var arr = [];
     if (Boolean(article)) {
+      var subParent = categories.filter(
+        (c) => c._id === article.category.parent
+      )[0];
+      if (subParent !== undefined) {
+        if (subParent.parent !== null) {
+          var parent = categories.filter((c) => c._id === subParent.parent)[0];
+          arr.push(parent.title);
+        } else {
+          arr.push(subParent.title);
+        }
+      }
       arr.push(article.category.title);
       arr.push(article.title);
     }
@@ -45,11 +56,9 @@ const MainArticle = () => {
       {Boolean(article) && (
         <div className={styles.content}>
           <p className={styles.content__category}>
-            {
-              <NavLink to={`/danh-muc/${article.category.slug}`}>
-                {article.category.title}
-              </NavLink>
-            }
+            <NavLink to={`/danh-muc/${article.category.slug}`}>
+              {article.category.title}
+            </NavLink>
           </p>
           <p className={styles.content__title}>
             {article.title}

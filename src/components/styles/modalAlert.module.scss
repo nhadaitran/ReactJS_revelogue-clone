@@ -1,0 +1,86 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.modal {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1001;
+  min-width: $min-width;
+  @include BackgroundGlassEffect;
+  animation: appear 0.5s forwards;
+  &__close {
+    position: absolute;
+    top: $spacing-md;
+    right: $spacing-md;
+    border-radius: 50%;
+    width: $spacing-lg * 1.3;
+    height: $spacing-lg * 1.3;
+    border: 2px solid $inherit;
+    background: transparent;
+    opacity: 0.7;
+    cursor: pointer;
+    z-index: 1002;
+    & > svg {
+      vertical-align: middle;
+      color: $inherit;
+    }
+    @include breakpoint(sm) {
+      display: none;
+    }
+  }
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: $bg-white;
+    height: 100%;
+    width: 100%;
+    @include breakpoint(sm) {
+      width: auto;
+      height: 40%;
+      max-width: 35%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: $spacing-md;
+    }
+    &__logo {
+      flex: 1 0 40%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        font-size: $h1*2;
+        color:$alert;
+      }
+    }
+    &__title {
+      flex: 1 0 40%;
+      display: flex;
+      justify-content: center;
+      font-size: $h2;
+      color:$text-black;
+    }
+    &__button {
+      flex: 1 0 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button{
+        // design sau
+      }
+    }
+  }
+}
+
+@keyframes appear {
+  0% {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

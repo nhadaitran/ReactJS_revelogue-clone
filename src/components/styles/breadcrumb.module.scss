@@ -27,6 +27,7 @@
       & > a {
         font-weight: bold;
         color: $text-black;
+        pointer-events: none;
       }
     }
   }

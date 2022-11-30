@@ -29,6 +29,7 @@ const persistConfig = getPersistConfig({
     "user.info",
     "user.status",
     "category.list",
+    "category.listUnNested",
     "category.status",
     "article.tempContent",
     "article.item",

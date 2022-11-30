@@ -33,13 +33,7 @@ const BlogPost = (props) => {
     },
     [data, index]
   );
-  const preventScroll = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-  };
   React.useEffect(() => {
-    carousel.current.addEventListener("wheel", preventScroll);
     const SliderInterval = setInterval(() => {
       incrementCarousel(1);
     }, 5000);

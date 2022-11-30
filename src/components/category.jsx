@@ -1,5 +1,5 @@
 import * as React from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import parse from "html-react-parser";
 import moment from "moment";
@@ -12,9 +12,12 @@ const Category = () => {
   const value = React.useContext(StoreContext);
   const setBreadcrumb = value.breadcrumb[1];
   let dispatch = useDispatch();
-  let { slug } = useParams();
+  let params = useParams();
+  let location = useLocation();
+  var { [Object.keys(params).pop()]: slug } = params;
+  const categories = useSelector((state) => state.category.listUnNested);
   const category = useSelector((state) =>
-    state.category.list.find((c) => c.slug === slug)
+    state.category.listUnNested.find((c) => c.slug === slug)
   );
   const articles = useSelector((state) =>
     state.article.listByCategory.find((c) => Object.keys(c)[0] === slug)
@@ -23,12 +26,14 @@ const Category = () => {
     if (!articles) {
       dispatch(getArticlesByCategorySlug(slug));
     }
-  }, [category]);
+  }, [articles, dispatch, slug]);
 
   React.useEffect(() => {
-    var arr = [];
-    arr.push(category.title);
-    setBreadcrumb(arr);
+    var catSlug = location.pathname.split("/").slice(2);
+    var breadcrumb = categories
+      .filter((c) => catSlug.includes(c.slug))
+      .map((c) => c.title);
+    setBreadcrumb(breadcrumb);
   }, [category, setBreadcrumb]);
   return (
     <div className={styles.container}>
@@ -40,24 +45,26 @@ const Category = () => {
                   <img src={`${data.image_url}`} alt="" />
                 </div>
                 <div className={styles.container__group__card__body}>
-                  <p className={styles.container__group__card__body__category}>
+                  <div
+                    className={styles.container__group__card__body__category}
+                  >
                     {data.category.title}
-                  </p>
+                  </div>
                   <NavLink
                     to={`/bai-viet/${data.slug}`}
                     className={styles.container__group__card__body__title}
                   >
                     {data.title} <SaveButton />
                   </NavLink>
-                  <p
+                  <div
                     className={styles.container__group__card__body__description}
                   >
                     {parse(data.content)}
-                  </p>
-                  <p className={styles.container__group__card__body__meta}>
+                  </div>
+                  <div className={styles.container__group__card__body__meta}>
                     {data.writer.fullname}, {moment(data.updated_at).fromNow()}{" "}
                     | <AccessTimeIcon /> 15 min read
-                  </p>
+                  </div>
                 </div>
               </div>
             ))
