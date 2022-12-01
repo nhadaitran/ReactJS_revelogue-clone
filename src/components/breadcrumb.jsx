@@ -6,7 +6,6 @@ import slugify from "slugify";
 const Breadcrumbs = () => {
   const value = React.useContext(StoreContext);
   const breadcrumb = value.breadcrumb[0];
-  console.log(breadcrumb);
   return (
     <nav className={styles.container}>
       <ol>

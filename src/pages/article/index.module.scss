@@ -8,6 +8,7 @@
     padding-top: $header-height - $spacing-lg;
     margin: 0 $spacing-xl;
     display: flex;
+    justify-content:space-between;
   }
   @include breakpoint(xl) {
     margin: 0 $spacing-xl * 2;

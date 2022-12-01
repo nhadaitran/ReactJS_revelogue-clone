@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <>
       <React.Suspense fallback={<Loading />}>
-        {data && (
+        {data && data.trending && (
           <div className={styles.index}>
             <TextSlider data={data.trending} />
             <ImageSlider data={data.newest} />

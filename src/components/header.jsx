@@ -14,8 +14,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import Calendar from "./calendar";
 import Dropdown from "./menuDropdown";
+import { StoreContext } from "../utils/store";
 
 const Header = () => {
+  const value = React.useContext(StoreContext);
+  const openAuth = value.auth[1];
+
   let dispatch = useDispatch();
   let location = useLocation();
 
@@ -109,27 +113,37 @@ const Header = () => {
                         {data.title}
                         <MoreVertIcon />
                       </NavLink>
-                      <Dropdown type={`subCategory`} item={data} subItems={data.children} />
+                      <Dropdown
+                        type={`subCategory`}
+                        item={data}
+                        subItems={data.children}
+                      />
                     </li>
                   )
               )}
-              {sUser.info && (
-                <>
-                  <li>
-                    <NavLink
-                      ref={adminLink}
-                      className={({ isActive }) =>
-                        isActive
-                          ? styles[`nav__item--active`]
-                          : styles.nav__item
-                      }
-                      to="/admin"
-                    >
-                      Admin
-                    </NavLink>
-                    <Dropdown type={`admin`} logout={handleLogout} />
-                  </li>
-                </>
+              {sUser.info ? (
+                <li>
+                  <NavLink
+                    ref={adminLink}
+                    className={({ isActive }) =>
+                      isActive ? styles[`nav__item--active`] : styles.nav__item
+                    }
+                    to="/admin"
+                  >
+                    Admin
+                  </NavLink>
+                  <Dropdown type={`admin`} logout={handleLogout} />
+                </li>
+              ) : (
+                <li>
+                  <NavLink
+                    className={styles.nav__item}
+                    to="#"
+                    onClick={() => openAuth(true)}
+                  >
+                    Đăng nhập
+                  </NavLink>
+                </li>
               )}
             </ul>
           </nav>

@@ -21,6 +21,11 @@ export const getArticle = createAsyncThunk(
   }
 );
 
+export const getNews = createAsyncThunk("article/getNews", async () => {
+  const { data } = await axios.get(`${API_URL}article/news`);
+  return data;
+});
+
 export const getArticlesByStatus = createAsyncThunk(
   "article/getArticlesByStatus",
   async () => {
@@ -98,6 +103,19 @@ export const articleSlice = createSlice({
       state.status = HTTP_STATUS.REJECTED;
       state.message = payload;
       state.homeStatus = null;
+    },
+
+    // getNews
+    [getNews.pending](state) {
+      state.status = HTTP_STATUS.PENDING;
+    },
+    [getNews.fulfilled](state, { payload }) {
+      state.listHome = payload;
+      state.status = HTTP_STATUS.FULFILLED;
+    },
+    [getNews.rejected](state, { payload }) {
+      state.status = HTTP_STATUS.REJECTED;
+      state.message = payload;
     },
 
     // getArticles
