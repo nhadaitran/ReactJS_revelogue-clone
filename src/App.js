@@ -19,6 +19,9 @@ import UploadArticle from "./pages/uploadArticle/index";
 import StatusArticle from "./pages/statusArticle/index";
 import Admin from "./pages/admin/index";
 
+// Error
+import NotFound from "./pages/error/notfound/index";
+
 // Component
 import ScrollButton from "./components/scrollButton";
 import ModalAuth from "./components/modalAuth";
@@ -56,6 +59,7 @@ function App() {
                   <Route path="status" element={<StatusArticle />} />
                 </Route>
               </Route>
+              <Route path="*" element={<NotFound />} />
             </Routes>
             <ScrollButton />
           </AppLayout>

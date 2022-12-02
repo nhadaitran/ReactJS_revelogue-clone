@@ -121,26 +121,118 @@ const FormLogin = ({ onSubmit }) => {
     </form>
   );
 };
+
 const FormRegister = () => {
+  const [groupInput, setGroupInput] = React.useState(1);
   return (
     <form autoComplete="off">
-      <div className={styles.modal__container__form__inputContainer}>
-        <label>Tên người đùng</label>
-        <br />
-        <input type="text" name="username" required />
+      <div
+        className={
+          groupInput === 1
+            ? styles[`modal__container__form__groupInput--open`]
+            : styles[`modal__container__form__groupInput--close`]
+        }
+      >
+        <div
+          className={styles.modal__container__form__groupInput__inputContainer}
+        >
+          <label htmlFor="fullname">Tên người đùng</label>
+          <br />
+          <input type="text" name="fullname" id="fullname" required />
+        </div>
+        <div
+          className={styles.modal__container__form__groupInput__inputContainer}
+        >
+          <label htmlFor="username">Username</label>
+          <br />
+          <input type="text" name="username" id="username" required />
+        </div>
+        <div
+          className={styles.modal__container__form__groupInput__inputContainer}
+        >
+          <label>Bạn là:</label>
+          <div
+            className={
+              styles.modal__container__form__groupInput__inputContainer__checkboxContainer
+            }
+          >
+            <div
+              className={
+                styles.modal__container__form__groupInput__inputContainer__checkboxContainer__checkbox
+              }
+            >
+              <input type="radio" name="sex" id="male" value="1" />
+              <label htmlFor="male">Nam</label>
+            </div>
+            <div
+              className={
+                styles.modal__container__form__groupInput__inputContainer__checkboxContainer__checkbox
+              }
+            >
+              <input type="radio" name="sex" id="female" value="0" />
+              <label htmlFor="female">Nữ</label>
+            </div>
+            <div
+              className={
+                styles.modal__container__form__groupInput__inputContainer__checkboxContainer__checkbox
+              }
+            >
+              <input type="radio" name="sex" id="other" value="2" />
+              <label htmlFor="other">Khác</label>
+            </div>
+          </div>
+        </div>
+        <div
+          className={styles.modal__container__form__groupInput__buttonContainer}
+        >
+          <button onClick={() => setGroupInput(2)}>Tiếp tục</button>
+        </div>
       </div>
-      <div className={styles.modal__container__form__inputContainer}>
-        <label>Email</label>
-        <br />
-        <input type="text" name="email" required />
-      </div>
-      <div className={styles.modal__container__form__inputContainer}>
-        <label>Mật khẩu</label>
-        <br />
-        <input type="password" name="password" required />
-      </div>
-      <div className={styles.modal__container__form__buttonContainer}>
-        <input type="submit" value="Đăng ký" />
+
+      <div
+        className={
+          groupInput === 2
+            ? styles[`modal__container__form__groupInput--open`]
+            : styles[`modal__container__form__groupInput--close`]
+        }
+      >
+        <div
+          className={styles.modal__container__form__groupInput__inputContainer}
+        >
+          <label htmlFor="email">Email</label>
+          <br />
+          <input type="text" name="email" id="email" required />
+        </div>
+        <div
+          className={
+            styles.modal__container__form__groupInput__smallInputContainer
+          }
+        >
+          <div
+            className={
+              styles.modal__container__form__groupInput__smallInputContainer__inputContainer
+            }
+          >
+            <label htmlFor="password">Mật khẩu</label>
+            <br />
+            <input type="password" name="password" id="password" required />
+          </div>
+          <div
+            className={
+              styles.modal__container__form__groupInput__smallInputContainer__inputContainer
+            }
+          >
+            <label htmlFor="password">Xác nhận mật khẩu</label>
+            <br />
+            <input type="password" name="password" id="password" required />
+          </div>
+        </div>
+        <div
+          className={styles.modal__container__form__groupInput__buttonContainer}
+        >
+          <button onClick={() => setGroupInput(1)}>Quay lại</button>
+          <input type="submit" value="Đăng ký" />
+        </div>
       </div>
     </form>
   );

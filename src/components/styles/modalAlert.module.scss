@@ -51,8 +51,8 @@
       justify-content: center;
       align-items: center;
       svg {
-        font-size: $h1*2;
-        color:$alert;
+        font-size: $h1 * 2;
+        color: $alert;
       }
     }
     &__title {
@@ -60,15 +60,30 @@
       display: flex;
       justify-content: center;
       font-size: $h2;
-      color:$text-black;
+      color: $text-black;
     }
     &__button {
       flex: 1 0 20%;
       display: flex;
       justify-content: center;
       align-items: center;
-      button{
-        // design sau
+      button {
+        cursor: pointer;
+        color: $text-white;
+        text-transform: uppercase;
+        border-radius: $spacing-lg;
+        border: none;
+        background: $text-black;
+        font-size: $h5;
+        font-weight: bolder;
+        height: $spacing-lg;
+        width: 20%;
+        opacity: 1;
+        transition: all 0.3s;
+        &:hover {
+          color: $text-link;
+          opacity: 0.5;
+        }
       }
     }
   }

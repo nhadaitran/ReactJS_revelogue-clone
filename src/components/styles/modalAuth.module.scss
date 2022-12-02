@@ -61,6 +61,100 @@
     &__form {
       font-size: $h5;
       margin-top: $spacing-xl;
+      &__groupInput {
+        &__smallInputContainer {
+          display: flex;
+          margin-bottom: $spacing-lg * 1.3;
+          &__inputContainer {
+            margin: $spacing-sm 0;
+            color: $inherit;
+            font-weight: bolder;
+            & > input {
+              margin: $spacing-sm 0;
+              width: 95%;
+              padding: 0 $spacing-sm;
+              height: $spacing-lg * 1.5;
+              border-radius: $spacing-sm;
+              border: 1px solid $muted;
+              background-color: $bg-white;
+            }
+          }
+        }
+        &__inputContainer {
+          margin: $spacing-sm 0;
+          color: $inherit;
+          font-weight: bolder;
+          & > input {
+            margin: $spacing-sm 0;
+            width: 100%;
+            padding: 0 $spacing-sm;
+            height: $spacing-lg * 1.5;
+            border-radius: $spacing-sm;
+            border: 1px solid $muted;
+            background-color: $bg-white;
+          }
+          &:nth-child(3) {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+          }
+          &__checkboxContainer {
+            margin-right: 0;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+            &__checkbox {
+              font-weight: bold;
+              margin: $spacing-md 0;
+              & > input {
+                margin: 0 calc($spacing-sm/2) 0 0;
+                vertical-align: middle;
+              }
+            }
+          }
+        }
+        &__buttonContainer {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: $spacing-md 0;
+          input {
+            cursor: pointer;
+            color: $text-white;
+            text-transform: uppercase;
+            border-radius: $spacing-lg;
+            border: none;
+            background: $text-black;
+            font-size: $h4;
+            font-weight: bolder;
+            height: $spacing-lg * 1.3;
+            width: 40%;
+          }
+          button {
+            color: $text-black;
+            background: transparent;
+            cursor: pointer;
+            text-transform: uppercase;
+            border-radius: $spacing-lg;
+            border: none;
+            font-size: $h4;
+            font-weight: bolder;
+            height: fit-content;
+            transition: all 0.3s;
+            &:hover {
+              color: $text-link;
+            }
+          }
+        }
+
+        &--open {
+          display: block;
+        }
+        &--close {
+          display: none;
+        }
+      }
+
       &__inputContainer {
         margin: $spacing-sm 0;
         color: $inherit;
@@ -106,7 +200,7 @@
           font-size: $h4;
           font-weight: bolder;
           height: $spacing-lg * 1.3;
-          width: 50%;
+          width: 40%;
         }
       }
     }
