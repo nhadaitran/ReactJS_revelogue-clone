@@ -14,6 +14,7 @@ import AppLayout from "./layouts/layout";
 import Article from "./pages/article/index";
 import Category from "./pages/category/index";
 import Home from "./pages/home/index";
+import AdminArticle from "./pages/adminArticle/index";
 import UploadArticle from "./pages/uploadArticle/index";
 import StatusArticle from "./pages/statusArticle/index";
 import Admin from "./pages/admin/index";
@@ -43,11 +44,17 @@ function App() {
               <Route path="bai-viet/:slug" element={<Article />} />
               <Route path="danh-muc/:slug" element={<Category />} />
               <Route path="danh-muc/:slug/:subSlug" element={<Category />} />
-              <Route path="danh-muc/:slug/:subSlug/:subSubSlug" element={<Category />} />
+              <Route
+                path="danh-muc/:slug/:subSlug/:subSubSlug"
+                element={<Category />}
+              />
               <Route path="admin">
                 <Route index element={<Admin />} />
-                <Route path="upload" element={<UploadArticle />} />
-                <Route path="status" element={<StatusArticle />} />
+                <Route path="article">
+                  <Route index element={<AdminArticle />} />
+                  <Route path="upload" element={<UploadArticle />} />
+                  <Route path="status" element={<StatusArticle />} />
+                </Route>
               </Route>
             </Routes>
             <ScrollButton />

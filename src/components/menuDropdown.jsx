@@ -29,7 +29,33 @@ const MenuDropdown = (props) => {
             )
         )}
       {props.type === "admin" && (
-        <li onClick={() => handleLogout()}>Đăng xuất</li>
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`subCategory--active`] : styles.subCategory
+              }
+              to={`/admin/category`}
+            >
+              Quản lý danh mục
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`subCategory--active`] : styles.subCategory
+              }
+              to={`/admin/article`}
+            >
+              Quản lý bài viết
+            </NavLink>
+          </li>
+          <li onClick={() => handleLogout()}>
+            <NavLink className={styles.subCategory} to={`#`}>
+              Đăng xuất
+            </NavLink>
+          </li>
+        </>
       )}
     </ul>
   );

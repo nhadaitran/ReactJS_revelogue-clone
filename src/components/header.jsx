@@ -37,7 +37,8 @@ const Header = () => {
 
   const handleAdminToggle = () => {
     if (adminLink.current !== null) {
-      adminLink.current.className.search("active") !== -1
+      location.pathname.search("article") !== -1 ||
+      location.pathname.search("category") !== -1
         ? setAdminOpen(true)
         : setAdminOpen(false);
     }
