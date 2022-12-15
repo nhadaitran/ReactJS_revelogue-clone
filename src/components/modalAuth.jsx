@@ -11,23 +11,21 @@ const ModalAuth = () => {
   const value = React.useContext(StoreContext);
   const closeModal = value.auth[1];
   const [isLogin, setIsLogin] = React.useState(true);
-  //   const useOutsideClick = (ref) => {
-  //     React.useEffect(() => {
-  //       function handleClickOutside(event) {
-  //         if (ref.current && !ref.current.contains(event.target)) {
-  //           alert("You clicked outside of me!");
-  //         }
-  //       }
-  //       // Bind the event listener
-  //       document.addEventListener("mousedown", handleClickOutside);
-  //       return () => {
-  //         // Unbind the event listener on clean up
-  //         document.removeEventListener("mousedown", handleClickOutside);
-  //       };
-  //     }, [ref]);
-  //   };
+  const useOutsideClick = (ref) => {
+    React.useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          closeModal(null);
+        }
+      }
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  };
   const wrapperRef = React.useRef(null);
-  //   useOutsideClick(wrapperRef);
+  useOutsideClick(wrapperRef);
   const handleSubmit = (data) => {
     if (data.type == "login") {
       dispatch(login(data));
@@ -133,17 +131,18 @@ const FormRegister = ({ onSubmit }) => {
     fullname: "",
     username: "",
     email: "",
-    sex: "",
+    sex: "1",
     password: "",
     confirmPassword: "",
   });
-  const [focused, setFocused] = React.useState(false);
+  const [invalidFullname, setInvalidFullname] = React.useState(false);
+  const [invalidUsername, setInvalidUsername] = React.useState(false);
+  const [invalidEmail, setInvalidEmail] = React.useState(false);
+  const [invalidPassword, setInvalidPassword] = React.useState(false);
+  const [invalidConfirm, setInvalidConfirm] = React.useState(false);
   const [groupInput, setGroupInput] = React.useState(1);
 
-  const handleFocus =(e)=>{
-    setFocused(true)
-  }
-  // const fullnameRef = React.useRef();
+  const fullnameRef = React.useRef();
   // const usernameRef = React.useRef();
   // const maleRef = React.useRef();
   // const femaleRef = React.useRef();
@@ -152,23 +151,69 @@ const FormRegister = ({ onSubmit }) => {
   // const passwordRef = React.useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(values);
-    // onSubmit({
-    //   type: "register",
-    //   fullname: fullnameRef.current.value,
-    //   username: usernameRef.current.value,
-    //   sex: maleRef.current.checked
-    //     ? maleRef.current.value
-    //     : femaleRef.current.checked
-    //     ? femaleRef.current.value
-    //     : otherRef.current.value,
-    //   email: emailRef.current.value,
-    //   password: passwordRef.current.value,
-    // });
+    onSubmit({
+      type: "register",
+      fullname: values.fullname,
+      username: values.username,
+      sex: values.sex,
+      email: values.email,
+      password: values.password,
+    });
   };
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  const onBlur = (e) => {
+    if (e.target.name === "fullname") {
+      if (regex.validFullname.test(e.target.value)) {
+        setInvalidFullname(false);
+      } else if (!regex.validFullname.test(e.target.value)) {
+        setInvalidFullname(true);
+      }
+    }
+
+    if (e.target.name === "username") {
+      if (regex.validUsername.test(e.target.value)) {
+        setInvalidUsername(false);
+      } else if (!regex.validUsername.test(e.target.value)) {
+        setInvalidUsername(true);
+      }
+    }
+
+    if (e.target.name === "email") {
+      if (regex.validEmail.test(e.target.value)) {
+        setInvalidEmail(false);
+      } else if (!regex.validEmail.test(e.target.value)) {
+        setInvalidEmail(true);
+      }
+    }
+
+    if (e.target.name === "password") {
+      if (regex.validPassword.test(e.target.value)) {
+        setInvalidPassword(false);
+      } else if (!regex.validPassword.test(e.target.value)) {
+        setInvalidPassword(true);
+      }
+      if (e.target.value === values.confirmPassword) {
+        setInvalidConfirm(false);
+      } else {
+        setInvalidConfirm(true);
+      }
+    }
+
+    if (e.target.name === "confirmPassword") {
+      if (e.target.value === values.password) {
+        setInvalidConfirm(false);
+      } else {
+        setInvalidConfirm(true);
+      }
+    }
+  };
+
+  React.useEffect(() => {
+    fullnameRef.current.focus();
+  }, []);
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>
       <div
@@ -187,12 +232,12 @@ const FormRegister = ({ onSubmit }) => {
             type="text"
             name="fullname"
             id="fullname"
-            // ref={fullnameRef}
-            pattern={regex.validFullname}
+            ref={fullnameRef}
             onChange={onChange}
+            onBlur={onBlur}
             required
           />
-          <span>*{errorMessage.fullname}</span>
+          {invalidFullname && <span>*{errorMessage.fullname}</span>}
         </div>
         <div
           className={styles.modal__container__form__groupInput__inputContainer}
@@ -204,11 +249,11 @@ const FormRegister = ({ onSubmit }) => {
             name="username"
             id="username"
             // ref={usernameRef}
-            pattern={regex.validUsername}
             onChange={onChange}
+            onBlur={onBlur}
             required
           />
-          <span>*{errorMessage.username}</span>
+          {invalidUsername && <span>*{errorMessage.username}</span>}
         </div>
         <div
           className={styles.modal__container__form__groupInput__inputContainer}
@@ -231,7 +276,7 @@ const FormRegister = ({ onSubmit }) => {
                 // ref={maleRef}
                 onChange={onChange}
                 value="1"
-                defaultChecked
+                checked
               />
               <label htmlFor="male">Nam</label>
             </div>
@@ -287,15 +332,15 @@ const FormRegister = ({ onSubmit }) => {
           <label htmlFor="email">Email</label>
           <br />
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             // ref={emailRef}
-            pattern={`${regex.validEmail}`}
             onChange={onChange}
+            onBlur={onBlur}
             required
           />
-          <span>*{errorMessage.email}</span>
+          {invalidEmail && <span>*{errorMessage.email}</span>}
         </div>
         <div
           className={styles.modal__container__form__groupInput__inputContainer}
@@ -308,9 +353,10 @@ const FormRegister = ({ onSubmit }) => {
             id="password"
             // ref={passwordRef}
             onChange={onChange}
+            onBlur={onBlur}
             required
           />
-          <span>*{errorMessage.password}</span>
+          {invalidPassword && <span>*{errorMessage.password}</span>}
         </div>
         <div
           className={styles.modal__container__form__groupInput__inputContainer}
@@ -322,16 +368,26 @@ const FormRegister = ({ onSubmit }) => {
             name="confirmPassword"
             id="confirmPassword"
             onChange={onChange}
-            pattern={+values.password}
+            onBlur={onBlur}
             required
           />
-          <span>*{errorMessage.confirmPassword}</span>
+          {invalidConfirm && <span>*{errorMessage.confirmPassword}</span>}
         </div>
         <div
           className={styles.modal__container__form__groupInput__buttonContainer}
         >
           <button onClick={() => setGroupInput(1)}>Quay lại</button>
-          <input type="submit" value="Đăng ký" />
+          <input
+            type="submit"
+            value="Đăng ký"
+            invalid={(
+              invalidFullname ||
+              invalidUsername ||
+              invalidEmail ||
+              invalidPassword ||
+              invalidConfirm
+            ).toString()}
+          />
         </div>
       </div>
     </form>
