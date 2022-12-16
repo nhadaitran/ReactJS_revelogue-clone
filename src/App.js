@@ -15,6 +15,7 @@ import Article from "./pages/article/index";
 import Category from "./pages/category/index";
 import Home from "./pages/home/index";
 import AdminArticle from "./pages/adminArticle/index";
+import AdminInfo from "./pages/adminInfo/index";
 import UploadArticle from "./pages/uploadArticle/index";
 import StatusArticle from "./pages/statusArticle/index";
 import Admin from "./pages/admin/index";
@@ -58,6 +59,7 @@ function App() {
                   <Route path="upload" element={<UploadArticle />} />
                   <Route path="status" element={<StatusArticle />} />
                 </Route>
+                <Route path="info" element={<AdminInfo />} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>

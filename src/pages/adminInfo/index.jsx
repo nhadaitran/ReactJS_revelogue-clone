@@ -1,9 +1,9 @@
 import styles from "./index.module.scss";
-const AdminArticle = () => {
+const AdminInfo = () => {
   return (
     <div className={styles.index}>
-      abasbbadsdhj
+      abc
     </div>
   );
 };
-export default AdminArticle;
+export default AdminInfo;

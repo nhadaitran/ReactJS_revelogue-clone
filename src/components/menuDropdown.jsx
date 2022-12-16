@@ -35,6 +35,16 @@ const MenuDropdown = (props) => {
               className={({ isActive }) =>
                 isActive ? styles[`subCategory--active`] : styles.subCategory
               }
+              to={`/admin/info`}
+            >
+              Thông tin cá nhân
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? styles[`subCategory--active`] : styles.subCategory
+              }
               to={`/admin/category`}
             >
               Quản lý danh mục

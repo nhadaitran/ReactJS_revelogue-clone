@@ -1,5 +1,5 @@
-// export const API_URL="https://node-revelogue.vercel.app/api/v1/";
-export const API_URL = "http://localhost:3001/api/v1/";
+export const API_URL="https://node-revelogue.vercel.app/api/v1/";
+// export const API_URL = "http://localhost:3001/api/v1/";
 
 export const HTTP_STATUS = Object.freeze({
   PENDING: "PENDING",
@@ -14,21 +14,7 @@ export const HTTP_STATUS = Object.freeze({
   // INSERT_FAILED: 'INSERT_FAILED',
 });
 
-// export const validEmail = new RegExp(
-//   /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/
-// );
-
-// // Minimum 8 and maximum 32 characters, at least one uppercase letter, one lowercase letter, one number and one special character
-// export const validPassword = new RegExp(
-//   "^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{8,32}$"
-// );
-
-// export const validUsername = new RegExp(
-//   "^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"
-// );
-
 export const regex = {
-  // validFullname: new RegExp(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/),
   validFullname: new RegExp(
     /(?:[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ]{1,}\s)+[A-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ][a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵ]+/g
   ),

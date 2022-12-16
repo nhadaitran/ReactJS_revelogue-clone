@@ -1,0 +1,16 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.index {
+  min-height: 100vh;
+  margin: 0 3%;
+  padding-top: $header-height * 2;
+  @include breakpoint(lg) {
+    padding-top: $header-height * 1.2;
+    margin: 0 5%;
+    display: flex;
+  }
+  @include breakpoint(xl) {
+    margin: 0 7%;
+  }
+}
