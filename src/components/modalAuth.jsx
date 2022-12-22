@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./styles/modalAuth.module.scss";
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +9,9 @@ import { StoreContext } from "../utils/store";
 import { regex, errorMessage } from "../redux/constants";
 const ModalAuth = () => {
   let dispatch = useDispatch();
+  let navigate = useNavigate();
+  let location = useLocation();
+  let from = location.state?.from?.pathname || "/";
   const value = React.useContext(StoreContext);
   const closeModal = value.auth[1];
   const [isLogin, setIsLogin] = React.useState(true);
@@ -28,22 +32,23 @@ const ModalAuth = () => {
   useOutsideClick(wrapperRef);
   const handleSubmit = (data) => {
     if (data.type == "login") {
-      dispatch(login(data));
+      dispatch(login(data)).then(() => {
+        navigate(from, { replace: true });
+        closeModal(false);
+      });
     } else if (data.type == "register") {
-      dispatch(register(data));
+      dispatch(register(data)).then(() => {
+        navigate(from, { replace: true });
+        closeModal(false);
+      });
     }
   };
-
   const { status } = useSelector((state) => state.user);
-  React.useEffect(() => {
-    if (status === HTTP_STATUS.PENDING) {
-      closeModal(false);
-    } else if (status === HTTP_STATUS.REJECTED) {
-      closeModal(true);
-    }
-  }, [closeModal, status]);
   return (
-    <div className={styles.modal}>
+    <div
+      className={styles.modal}
+      style={{ display: status === HTTP_STATUS.PENDING ? "none" : "block" }}
+    >
       <ButtonClose closeModal={closeModal} />
       <div className={styles.modal__container} ref={wrapperRef}>
         <div className={styles.modal__container__auth}>

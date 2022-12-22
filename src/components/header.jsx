@@ -19,9 +19,8 @@ import { StoreContext } from "../utils/store";
 const Header = () => {
   const value = React.useContext(StoreContext);
   const openAuth = value.auth[1];
-
-  let dispatch = useDispatch();
   let location = useLocation();
+  let dispatch = useDispatch();
 
   const sArticle = useSelector((state) => state.article.status);
   const sCategory = useSelector((state) => state.category.status);

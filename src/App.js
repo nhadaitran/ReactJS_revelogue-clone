@@ -22,18 +22,21 @@ import Admin from "./pages/admin/index";
 
 // Error
 import NotFound from "./pages/error/notfound/index";
+import Unauthorized from "./pages/error/unauthorized/index";
 
 // Component
 import ScrollButton from "./components/scrollButton";
 import ModalAuth from "./components/modalAuth";
 import ModalPreview from "./components/modalPreview";
 import ModalAlert from "./components/modalAlert";
+import RequireAuth from "./components/requireAuth";
 
 // Style // eslint-disable-next-line no-unused-vars
 import styles from "./styles/index.scss";
 
 function App() {
   const value = React.useContext(StoreContext);
+  const ROLES = { admin: "admin", user: "user", staff: "staff" };
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -52,15 +55,18 @@ function App() {
                 path="danh-muc/:slug/:subSlug/:subSubSlug"
                 element={<Category />}
               />
-              <Route path="admin">
-                <Route index element={<Admin />} />
-                <Route path="article">
-                  <Route index element={<AdminArticle />} />
-                  <Route path="upload" element={<UploadArticle />} />
-                  <Route path="status" element={<StatusArticle />} />
+              <Route element={<RequireAuth allowedRoles={[ROLES.admin]} openAuth={value.auth[1]} />}>
+                <Route path="admin">
+                  <Route index element={<Admin />} />
+                  <Route path="article">
+                    <Route index element={<AdminArticle />} />
+                    <Route path="upload" element={<UploadArticle />} />
+                    <Route path="status" element={<StatusArticle />} />
+                  </Route>
+                  <Route path="info" element={<AdminInfo />} />
                 </Route>
-                <Route path="info" element={<AdminInfo />} />
               </Route>
+              <Route path="unauthorized" element={<Unauthorized />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
             <ScrollButton />

@@ -1,0 +1,41 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.container {
+  width: 100%;
+  height: $header-height * 3.5;
+  background: $secondary;
+  display: flex;
+  justify-content: center;
+  margin-top: $spacing-md;
+  &__group {
+    width: fit-content;
+    &__avatar {
+      margin: 0 auto;
+      transform: translateY(-20%);
+      border: 2px solid;
+      border-radius: 50%;
+      width: $header-height * 2;
+      height: $header-height * 2;
+      @include BackgroundImage;
+    }
+    &__name {
+      display: flex;
+      justify-content: center;
+      p {
+        transform: translateY(-20%);
+        color: $text-link;
+        font-weight: bold;
+        font-size: $h2;
+      }
+    }
+    &__intro {
+      display: flex;
+      justify-content: center;
+      span {
+        color: $inherit;
+        font-size: $h4;
+      }
+    }
+  }
+}

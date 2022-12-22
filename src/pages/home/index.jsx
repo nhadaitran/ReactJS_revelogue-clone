@@ -18,16 +18,18 @@ const Home = () => {
   return (
     <>
       <React.Suspense fallback={<Loading />}>
-        {data && data.trending && (
-          <div className={styles.index}>
-            <TextSlider data={data.trending} />
-            <ImageSlider data={data.newest} />
-            <CardSlider data={data.trending2} />
-            <BlogWidget data={data.newestL} />
-            <BlogPost data={data.newestC} title={"Điện ảnh"} />
-            <BlogPost data={data.newestM} title={"Âm nhạc"} />
-          </div>
-        )}
+        <div className={styles.index}>
+          {data && data.trending && (
+            <>
+              <TextSlider data={data.trending} />
+              <ImageSlider data={data.newest} />
+              <CardSlider data={data.trending2} />
+              <BlogWidget data={data.newestL} />
+              <BlogPost data={data.newestC} title={"Điện ảnh"} />
+              <BlogPost data={data.newestM} title={"Âm nhạc"} />
+            </>
+          )}
+        </div>
       </React.Suspense>
     </>
   );
